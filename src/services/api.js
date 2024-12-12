@@ -38,3 +38,30 @@ export const getVideos = async (type, id) => {
 
   return res?.data;
 };
+
+// Movies
+export const getMovies = async (page, sortBy, genres) => {
+  const res = await axios.get(
+    `${baseURL}/discover/movie?api_key=${apiKey}&page=${page}&sort_by=${sortBy}&with_genres=${genres}`
+  );
+
+  return res?.data;
+};
+
+// TV Shows
+export const getShows = async (page, sortBy, genres) => {
+  const res = await axios.get(
+    `${baseURL}/discover/tv?api_key=${apiKey}&page=${page}&sort_by=${sortBy}&with_genres=${genres}`
+  );
+
+  return res?.data;
+};
+
+// Search
+export const searchAll = async (query, page) => {
+  const res = await axios.get(
+    `${baseURL}/search/multi?api_key=${apiKey}&query=${query}&page=${page}`
+  );
+
+  return res?.data;
+};

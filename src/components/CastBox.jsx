@@ -11,7 +11,10 @@ const CastBox = ({ credits }) => {
         {credits?.length === 0 && <p>Uh oh, No Casts found!!😢</p>}
         {credits &&
           credits?.map((item) => (
-            <div key={item?.id} className="flex items-end gap-2 max-w-[350px] w-full mx-auto rounded-md shadow-md border">
+            <div
+              key={item?.id}
+              className="flex items-end gap-2 max-w-[350px] w-full mx-auto rounded-md shadow-md border"
+            >
               <img
                 src={
                   item?.profile_path
@@ -22,8 +25,10 @@ const CastBox = ({ credits }) => {
                 alt={item.name}
               />
               <div className="pr-3">
-                <h3 className="text-lg font-semibold">{item.name}</h3>
-                <h3 className="text-sm font-medium text-slate-500 mb-3">{item.character}</h3>
+                <h3 className="font-semibold">{item.name}</h3>
+                <h3 className="text-sm font-medium text-slate-500 mb-3">
+                  {item.character}
+                </h3>
               </div>
             </div>
           ))}

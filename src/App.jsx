@@ -11,6 +11,8 @@ import { RouterProvider } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import Search from "./pages/Search";
 import Details from "./pages/Details";
+import { AuthProvider } from "./context/authProvider";
+import { Toaster } from "sonner";
 
 const myRoutes = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +28,10 @@ const myRoutes = createBrowserRouter(
 const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={myRoutes} />
+      <AuthProvider>
+        <Toaster duration={3000} richColors position="bottom-right" />
+        <RouterProvider router={myRoutes} />
+      </AuthProvider>
     </ThemeProvider>
   );
 };

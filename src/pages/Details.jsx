@@ -5,13 +5,13 @@ import {
   imgPathResolve,
   originalImgPathResolve,
 } from "@/services/api";
-import { Calendar, CheckCircle, PlusIcon } from "lucide-react";
+import { Calendar, CheckCircle, Clock, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
 import "react-circular-progressbar/dist/styles.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
-import { resColor, toPercentage } from "@/utils/helpers";
+import { minsToHours, resColor, toPercentage } from "@/utils/helpers";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import CastBox from "@/components/CastBox";
@@ -26,6 +26,7 @@ const Details = () => {
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const getData = async () => {
       try {
         const [detailsData, creditData, videosData] = await Promise.all([
@@ -54,8 +55,6 @@ const Details = () => {
     getData();
   }, [type, id]);
 
-  console.log(video, videos, "videos");
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -78,11 +77,8 @@ const Details = () => {
           backgroundPosition: "center",
         }}
       >
-        {/* Gradient Overlay */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black"></div> */}
-
         <div className="max-w-7xl w-full mx-auto p-5">
-          <div className="flex items-center justify-center md:justify-start gap-10 flex-col md:flex-row text-white">
+          <div className="flex items-center justify-center md:justify-start gap-5 flex-col md:flex-row text-white">
             <img
               src={`${imgPathResolve}/${details?.poster_path}`}
               className="w-[220px] lg:w-[300px] h-[300px] md:h-[350px] lg:h-[450px] rounded-md"
@@ -101,6 +97,17 @@ const Details = () => {
                   <Calendar size={17} />
                   <h3>{new Date(date).toLocaleDateString("en-US")} (US)</h3>
                 </div>
+                {type === "movie" && (
+                  <>
+                    <div>*</div>
+                    <div className="flex items-center gap-1">
+                      <Clock size={17} />
+                      <h3 className="text-sm">
+                        {minsToHours(details?.runtime)}
+                      </h3>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="flex items-center gap-3">
@@ -159,16 +166,23 @@ const Details = () => {
         <CastBox credits={credits} />
       </div>
 
-      <div className="max-w-7xl w-full mx-auto px-5 flex flex-col items-center">
-        <VideoComp id={video?.key} />
-        <div className="flex my-10 pb-5 gap-5 max-w-7xl w-full mx-auto overflow-x-scroll">
-          {videos &&
-            videos?.map((item) => (
-              <div key={item?.id} className="min-w-[300px]">
-                <VideoComp id={item.key} small />
-                <h3 className="line-clamp-2 text-lg font-semibold">{item?.name}</h3>
-              </div>
-            ))}
+      <div className="max-w-7xl w-full mx-auto px-5">
+        <h3 className="text-xl text-left uppercase font-bold my-5">
+          Watch Trailer
+        </h3>
+        <div className="flex flex-col items-center">
+          <VideoComp id={video?.key} />
+          <div className="flex my-10 pb-5 gap-5 max-w-7xl w-full mx-auto overflow-x-scroll">
+            {videos &&
+              videos?.map((item) => (
+                <div key={item?.id} className="min-w-[300px]">
+                  <VideoComp id={item.key} small />
+                  <h3 className="line-clamp-2 text-lg font-semibold">
+                    {item?.name}
+                  </h3>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>

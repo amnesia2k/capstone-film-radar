@@ -12,7 +12,6 @@ const Home = () => {
     trendingMovies(timeWindow)
       .then((res) => {
         setData(res);
-        console.log("res", res);
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
@@ -20,11 +19,11 @@ const Home = () => {
 
   return (
     <section className="max-w-7xl w-full mx-auto px-5">
-      <div className="flex flex-col md:flex-row items-baseline gap-4 my-10">
+      <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
         <header>
-          <h1 className="text-xl font-bold uppercase" title="Trending">
+          <h3 className="text-sm md:text-xl uppercase font-bold" title="Trending">
             Trending Movies
-          </h1>
+          </h3>
         </header>
         <div className="flex items-center gap-1 border border-green-200 rounded-full">
           <button
