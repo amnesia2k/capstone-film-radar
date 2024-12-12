@@ -1,3 +1,5 @@
+import { Search } from "lucide-react"; // Import the Lucide icon
+
 export const navLinks = [
   {
     id: 1,
@@ -24,6 +26,7 @@ export const navLinks = [
     id: 4,
     name: "Search",
     link: "/search",
-    tooltip: "Search"
+    tooltip: "Search",
+    icon: Search, // Add the Lucide icon here
   },
 ];

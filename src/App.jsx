@@ -13,6 +13,8 @@ import Search from "./pages/Search";
 import Details from "./pages/Details";
 import { AuthProvider } from "./context/authProvider";
 import { Toaster } from "sonner";
+import Watchlist from "./pages/Watchlist";
+import Protected from "./components/routes/Protected";
 
 const myRoutes = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +24,14 @@ const myRoutes = createBrowserRouter(
       <Route path="/tv" element={<Shows />} />
       <Route path="/search" element={<Search />} />
       <Route path="/:type/:id" element={<Details />} />
+      <Route
+        path="/watchlist"
+        element={
+          <Protected>
+            <Watchlist />
+          </Protected>
+        }
+      />
     </Route>
   )
 );
