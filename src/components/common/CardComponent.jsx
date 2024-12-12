@@ -4,6 +4,17 @@ import { StarIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CardComponent = ({ item, type }) => {
+  // Provide fallback values for missing properties
+  const posterPath = item?.poster_path
+    ? `${imgPathResolve}/${item.poster_path}`
+    : "https://www.reelviews.net/resources/img/default_poster.jpg"; // Replace with a valid placeholder image path
+  const voteAverage = item?.vote_average ? item.vote_average.toFixed(1) : "N/A";
+  const title = item?.title || item?.name || "Untitled";
+  const releaseYear =
+    item?.release_date || item?.first_air_date
+      ? new Date(item.release_date || item.first_air_date).getFullYear()
+      : "Unknown";
+
   return (
     <Link to={`/${type}/${item?.id}`}>
       <div
@@ -13,7 +24,7 @@ const CardComponent = ({ item, type }) => {
         {/* Movie Poster */}
         <img
           className="w-full h-full object-cover"
-          src={`${imgPathResolve}/${item.poster_path}`}
+          src={posterPath}
           alt={item?.title || item?.name}
         />
 
@@ -22,20 +33,16 @@ const CardComponent = ({ item, type }) => {
           {/* Rating */}
           <div className="flex items-center gap-1 absolute top-3 right-5">
             <StarIcon size={20} color="gold" />
-            <h3 className="text-sm font-semibold">
-              {item?.vote_average.toFixed(1)}
-            </h3>
+            <h3 className="text-sm font-semibold">{voteAverage}</h3>
           </div>
 
           {/* Title */}
           <h3 className="text-center font-bold text-lg px-2 truncate">
-            {item?.title || item?.name}
+            {title}
           </h3>
 
           {/* Release Year */}
-          <h4 className="text-center text-sm pb-3">
-            {new Date(item?.release_date || item?.first_air_date).getFullYear()}
-          </h4>
+          <h4 className="text-center text-sm pb-3">{releaseYear}</h4>
         </div>
       </div>
     </Link>
