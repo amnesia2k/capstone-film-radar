@@ -25,7 +25,7 @@ export const tvGenres = [
   { id: 16, name: "Animation" },
   { id: 35, name: "Comedy" },
   { id: 80, name: "Crime" },
-  // { id: 99, name: "Documentary" },
+  { id: 99, name: "Documentary" },
   { id: 18, name: "Drama" },
   { id: 10751, name: "Family" },
   { id: 10762, name: "Kids" },
