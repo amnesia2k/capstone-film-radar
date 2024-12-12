@@ -153,12 +153,60 @@ const Navbar = () => {
 
         {/* sm to md screens */}
         <div className="flex items-center lg:hidden gap-3">
-          <Avatar className="w-[30px] h-[30px]">
-            <AvatarImage src={<User2 />} />
-            <AvatarFallback className="cursor-pointer">
-              <User2 size={15} />
-            </AvatarFallback>
-          </Avatar>
+          {user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="w-[30px] h-[30px]">
+                  <AvatarImage src={user.photoURL} className="cursor-pointer" />
+                  <AvatarFallback className="cursor-pointer">
+                    <AvatarImage
+                      src={user.photoURL}
+                      className="cursor-pointer"
+                    />
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>
+                  Welcome, {googleUser?.displayName}
+                </DropdownMenuLabel>
+                <DropdownMenuGroup>
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Video />
+                    <span>My Watchlist</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+                <DropdownMenuItem
+                  className="cursor-pointer"
+                  onClick={handleLogout}
+                >
+                  <LogOut />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
+          {!user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="w-[30px] h-[30px]">
+                  <AvatarImage
+                    src={<User2 className="w-[50px] h-150px] p-1" />}
+                  />
+                  <AvatarFallback className="cursor-pointer">
+                    <User2 className="w-[50px] h-150px] p-1" />
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem onClick={handleLogin}>
+                  <FcGoogle />
+                  Sign in with Google
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
           <Button
             variant="ghost"
             className="h-[30px] w-[30px] border p-[10px] rounded-full"

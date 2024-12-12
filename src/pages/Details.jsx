@@ -62,7 +62,9 @@ const Details = () => {
       </div>
     );
   }
-
+  const posterPath = details?.poster_path
+    ? `${imgPathResolve}/${details.poster_path}`
+    : "https://www.reelviews.net/resources/img/default_poster.jpg"; // Replace with a valid placeholder image path
   const title = details?.title || details?.name;
   const date = type === "tv" ? details?.first_air_date : details?.release_date;
 
@@ -80,7 +82,7 @@ const Details = () => {
         <div className="max-w-7xl w-full mx-auto p-5">
           <div className="flex items-center justify-center md:justify-start gap-5 flex-col md:flex-row text-white">
             <img
-              src={`${imgPathResolve}/${details?.poster_path}`}
+              src={posterPath}
               className="w-[220px] lg:w-[300px] h-[300px] md:h-[350px] lg:h-[450px] rounded-md"
               alt=""
             />
