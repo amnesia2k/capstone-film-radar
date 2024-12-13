@@ -20,31 +20,33 @@ const Home = () => {
 
   return (
     <>
-      <Helmet>
-        <title>ReelsRadar • Home</title>
-        <meta
-          name="description"
-          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-        />
+      <head>
+        <Helmet>
+          <title>ReelsRadar • Home</title>
+          <meta
+            name="description"
+            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+          />
 
-        {/* OG Tags */}
-        <meta name="og:title" content="ReelsRadar • Home" />
-        <meta
-          name="og:description"
-          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-        />
-        <meta name="og:image" content="/movie_reel.png" />
-        <meta name="og:url" content="https://reelsradar.netlify.app/" />
+          {/* OG Tags */}
+          <meta name="og:title" content="ReelsRadar • Home" />
+          <meta
+            name="og:description"
+            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+          />
+          <meta name="og:image" content="/movie_reel_pub.png" />
+          <meta name="og:url" content="https://reelsradar.netlify.app/" />
 
-        {/* TwitterTags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="ReelsRadar • Home" />
-        <meta
-          name="twitter:description"
-          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-        />
-        <meta name="twitter:image" content="/movie_reel.png" />
-      </Helmet>
+          {/* TwitterTags */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content="ReelsRadar • Home" />
+          <meta
+            name="twitter:description"
+            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+          />
+          <meta name="twitter:image" content="/movie_reel_pub.png" />
+        </Helmet>
+      </head>
 
       <section className="max-w-7xl w-full mx-auto px-5">
         <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
