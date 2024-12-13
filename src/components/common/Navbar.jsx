@@ -88,7 +88,8 @@ const Navbar = () => {
               to={links.link}
               title={links.tooltip}
             >
-              {links.name}
+              {/* Conditionally render icon or name */}
+              {links.icon ? <links.icon size={20} /> : links.name}
             </NavLink>
           ))}
           <div>
@@ -110,12 +111,12 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>
-                  Welcome, {googleUser?.displayName}
+                  Welcome, {googleUser?.displayName} 😊
                 </DropdownMenuLabel>
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="cursor-pointer">
                     <Video />
-                    <span>My Watchlist</span>
+                    <Link to="/watchlist">My Watchlist</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuItem
@@ -168,12 +169,12 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>
-                  Welcome, {googleUser?.displayName}
+                  Welcome, {googleUser?.displayName} 😊
                 </DropdownMenuLabel>
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="cursor-pointer">
                     <Video />
-                    <span>My Watchlist</span>
+                    <Link to="/watchlist">My Watchlist</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuItem

@@ -16,14 +16,20 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import CastBox from "@/components/CastBox";
 import VideoComp from "@/components/VideoComp";
+import { toast } from "sonner";
+import { useAuth } from "@/context/useAuth";
+import { firestoreDb } from "@/services/firestore";
 
 const Details = () => {
   const { type, id } = useParams();
+  const { user } = useAuth();
+  const { addToWatchlist, checkIfInWatchlist, removeFromDb } = firestoreDb();
   const [loading, setLoading] = useState(true);
   const [details, setDetails] = useState({});
   const [credits, setCredits] = useState([]);
   const [video, setVideo] = useState(null);
   const [videos, setVideos] = useState([]);
+  const [isInWatchlist, setIsInWatchlist] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -54,6 +60,49 @@ const Details = () => {
 
     getData();
   }, [type, id]);
+
+  const toWatchlist = async () => {
+    if (!user) {
+      toast.error("Please sign in to add to your watchlist");
+      return;
+    }
+    const data = {
+      id: details?.id,
+      title: details?.title || details?.name,
+      type: type,
+      poster_path:
+        details?.poster_path ||
+        "https://www.reelviews.net/resources/img/default_poster.jpg",
+      release_date:
+        type === "movie" ? details?.release_date : details?.first_air_date,
+      vote_average: details?.vote_average,
+      overview: details?.overview,
+    };
+
+    const dataId = details?.id?.toString();
+    await addToWatchlist(user?.uid, dataId, data);
+    const isSetToWatchlist = await checkIfInWatchlist(user?.uid, dataId);
+    setIsInWatchlist(isSetToWatchlist);
+    // addToDb("watchlist", data);
+    // console.log(data);
+  };
+
+  useEffect(() => {
+    if (!user) {
+      setIsInWatchlist(false);
+      return;
+    }
+
+    checkIfInWatchlist(user?.uid, id).then((data) => {
+      setIsInWatchlist(data);
+    });
+  }, [id, user, checkIfInWatchlist]);
+
+  const handleDelete = async () => {
+    await removeFromDb(user?.uid, id);
+    const isSetToWatchlist = await checkIfInWatchlist(user?.uid, id);
+    setIsInWatchlist(isSetToWatchlist);
+  };
 
   if (loading) {
     return (
@@ -127,22 +176,26 @@ const Details = () => {
                   />
                 </div>
                 <h3 className="hidden md:block">User Score</h3>
-                <Button
-                  variant="ghost"
-                  onClick={() => console.log("clicked")}
-                  className="hidden border border-primary hover:bg-transparent text-green-200 hover:text-green-200"
-                >
-                  <CheckCircle />
-                  <span>In Watchlist</span>
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => console.log("clicked")}
-                  className="border hover:bg-transparent text-white hover:text-green-200"
-                >
-                  <PlusIcon />
-                  <span>Add to Watchlist</span>
-                </Button>
+
+                {isInWatchlist ? (
+                  <Button
+                    variant="ghost"
+                    onClick={handleDelete}
+                    className="border border-primary hover:bg-transparent text-green-200 hover:text-green-200"
+                  >
+                    <CheckCircle />
+                    <span>In Watchlist</span>
+                  </Button>
+                ) : (
+                  <Button
+                    variant="ghost"
+                    onClick={toWatchlist}
+                    className="border hover:bg-transparent text-white hover:text-green-200"
+                  >
+                    <PlusIcon />
+                    <span>Add to Watchlist</span>
+                  </Button>
+                )}
               </div>
               <h3 className="text-slate-300 text-sm italic">
                 {details?.tagline}
