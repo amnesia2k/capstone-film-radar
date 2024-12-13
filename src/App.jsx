@@ -39,7 +39,8 @@ const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <AuthProvider>
-        <Toaster duration={3000} richColors position="bottom-right" />
+        <Toaster duration={3000} richColors className="hidden lg:block" position="bottom-right" />
+        <Toaster duration={3000} richColors className="lg:hidden" position="top-center" />
         <RouterProvider router={myRoutes} />
       </AuthProvider>
     </ThemeProvider>

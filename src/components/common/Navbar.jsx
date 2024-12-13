@@ -52,14 +52,16 @@ const Navbar = () => {
       await logout();
       localStorage.removeItem("userToken");
       setGoogleUser(null);
-      toast.success(`Logged out of ${googleUser?.displayName} successfully`);
+      toast.success(`Logged out of ${user?.displayName} successfully`);
     } catch (error) {
       console.error(error, "error");
     }
   };
 
   return (
-    <header className="bg-white dark:bg-[#0c0a09] shadow-md border-b sticky top-0 z-50 mx-auto">
+    <header className="bg-white dark:bg-[#0c0a09] shadow-md border-b">
+      {" "}
+      {/*sticky top-0 z-50 mx-auto might add back later*/}
       <nav className="max-w-7xl w-full mx-auto py-[10px] px-5 flex items-center justify-between">
         <Link
           to="/"
@@ -78,6 +80,7 @@ const Navbar = () => {
           </span>
         </Link>
 
+        {/* Desktop Navlinks */}
         <div className="hidden lg:flex items-center font-semibold gap-10">
           {navLinks.map((links) => (
             <NavLink
@@ -99,19 +102,17 @@ const Navbar = () => {
           {user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Avatar className="w-[30px] h-[30px]">
-                  <AvatarImage src={user.photoURL} className="cursor-pointer" />
-                  <AvatarFallback className="cursor-pointer">
-                    <AvatarImage
-                      src={user.photoURL}
-                      className="cursor-pointer"
-                    />
-                  </AvatarFallback>
-                </Avatar>
+                <div className="cursor-pointer">
+                  <img
+                    src={user?.photoURL}
+                    className="w-[40px] h-[40px] rounded-full object-contain"
+                    alt={user?.displayName}
+                  />
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>
-                  Welcome, {googleUser?.displayName} 😊
+                  Welcome, {user?.displayName} 😊
                 </DropdownMenuLabel>
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="cursor-pointer">
@@ -133,14 +134,9 @@ const Navbar = () => {
           {!user && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Avatar className="w-[30px] h-[30px]">
-                  <AvatarImage
-                    src={<User2 className="w-[50px] h-150px] p-1" />}
-                  />
-                  <AvatarFallback className="cursor-pointer">
-                    <User2 className="w-[50px] h-150px] p-1" />
-                  </AvatarFallback>
-                </Avatar>
+                <div className="border rounded-full cursor-pointer">
+                  <User2 size={25} className="m-[10px]" />
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem onClick={handleLogin}>
@@ -154,9 +150,26 @@ const Navbar = () => {
 
         {/* sm to md screens */}
         <div className="flex items-center lg:hidden gap-3">
-          {user && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+          <div
+            className="flex items-center justify-center rounded-full cursor-pointer"
+            onClick={handleToggle}
+          >
+            {mobile ? <X size={30} /> : <Menu size={30} />}
+          </div>
+        </div>
+      </nav>
+      {/* Mobile Menu */}
+      <Dialog
+        as="div"
+        className={"lg:hidden"}
+        open={mobile}
+        onClose={setMobile}
+      >
+        <div className="fixed inset-0 z-50 bg-white dark:bg-[#0c0a09] max-w-[450px] w-[80%] md:w-[40%]" />
+        <DialogPanel className="fixed inset-y-0 left-0 z-50 overflow-y-auto py-[10px] w-[70%]">
+          <div className="flex items-center justify-between mb-3 pb-[12px]">
+            {user ? (
+              <div className="flex items-center gap-2 pl-5 mt-[10px]">
                 <Avatar className="w-[30px] h-[30px]">
                   <AvatarImage src={user.photoURL} className="cursor-pointer" />
                   <AvatarFallback className="cursor-pointer">
@@ -166,87 +179,34 @@ const Navbar = () => {
                     />
                   </AvatarFallback>
                 </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>
-                  Welcome, {googleUser?.displayName} 😊
-                </DropdownMenuLabel>
-                <DropdownMenuGroup>
-                  <DropdownMenuItem className="cursor-pointer">
-                    <Video />
-                    <Link to="/watchlist">My Watchlist</Link>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={handleLogout}
+                <div className="flex">
+                  <h3 className="md:font-semibold">
+                    Hello,{" "}
+                    <span className="font-semibold md:font-bold italic md:text-lg">
+                      {user.displayName}!
+                    </span>
+                  </h3>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2 pl-5 mt-[10px]">
+                <div className="border rounded-full">
+                  <User2 size={25} className="m-[10px]" />
+                </div>
+                <Button
+                  variant="outline"
+                  className="text-xs flex items-center p-2"
+                  onClick={handleLogin}
                 >
-                  <LogOut />
-                  <span>Log out</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-
-          {!user && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Avatar className="w-[30px] h-[30px]">
-                  <AvatarImage
-                    src={<User2 className="w-[50px] h-150px] p-1" />}
-                  />
-                  <AvatarFallback className="cursor-pointer">
-                    <User2 className="w-[50px] h-150px] p-1" />
-                  </AvatarFallback>
-                </Avatar>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem onClick={handleLogin}>
                   <FcGoogle />
                   Sign in with Google
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
-          <Button
-            variant="ghost"
-            className="h-[30px] w-[30px] border p-[10px] rounded-full"
-            onClick={handleToggle}
-          >
-            {mobile ? <X /> : <Menu />}
-          </Button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu */}
-      <Dialog
-        as="div"
-        className={"lg:hidden"}
-        open={mobile}
-        onClose={setMobile}
-      >
-        <div className="fixed inset-0 z-50 bg-white dark:bg-[#0c0a09] w-[60%] md:w-[50%]" />
-        <DialogPanel className="fixed inset-y-0 left-0 z-50 overflow-y-auto py-[10px] sm:max-w-sm sm:ring-1 sm:ring-text/10 w-[50%]">
-          <div className="flex items-center justify-between mb-3 pb-[12px]">
-            <Link
-              to="/"
-              className="flex items-center text-lg md:text-2xl uppercase hove:scale-105 transition-all font-semibold pl-5"
-              onClick={() => setMobile(false)}
-            >
-              <img
-                src={reel}
-                className="w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
-                alt="movie_reel"
-              />
-              <span className="text-primary text-lg md:text-xl">
-                <span className="text-2xl md:text-3xl font-bold">R</span>eels
-              </span>
-              <span className="text-lg md:text-xl">
-                <span className="text-2xl md:text-3xl font-bold">R</span>adar
-              </span>
-            </Link>
+                </Button>
+              </div>
+            )}
           </div>
-          <div className="flex flex-col gap-5 pl-5 md:pl-10 font-semibold">
+
+          {/* Navlinks */}
+          <div className="flex flex-col gap-5 pl-5 font-semibold">
             {navLinks.map((links) => (
               <NavLink
                 key={links.id}
@@ -262,8 +222,50 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="pl-5 md:pl-10 mt-5">
+          <div className="pl-5 mt-5">
             <SwitchToggle />
+          </div>
+
+          {/* Watchlist and Signout */}
+          <div>
+            {user ? (
+              <div className="flex flex-col gap-2 mt-5 pl-5">
+                <Button
+                  variant="ghost"
+                  className="flex justify-start w-[150px]"
+                  // onClick={() => toast.error("Sign in to access watchlist")}
+                  onClick={() => setMobile(false)}
+                >
+                  <Video />
+                  <Link to="/watchlist">
+                    <h3 className="text-base">My Watchlist</h3>
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="flex justify-start w-[150px]"
+                  onClick={handleLogout}
+                >
+                  <LogOut />
+                  <h3 className="text-base" onClick={() => setMobile(false)}>
+                    Signout
+                  </h3>
+                </Button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-2 mt-5 pl-5">
+                <Button
+                  variant="outline"
+                  className="flex justify-start w-[150px]"
+                  onClick={() => toast.error("Sign in to access watchlist")}
+                >
+                  <Video />
+                  <Link to="/watchlist" onClick={() => setMobile(false)}>
+                    My Watchlist
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         </DialogPanel>
       </Dialog>

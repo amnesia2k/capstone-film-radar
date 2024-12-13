@@ -84,7 +84,6 @@ const Details = () => {
     const isSetToWatchlist = await checkIfInWatchlist(user?.uid, dataId);
     setIsInWatchlist(isSetToWatchlist);
     // addToDb("watchlist", data);
-    // console.log(data);
   };
 
   useEffect(() => {
