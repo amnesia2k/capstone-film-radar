@@ -4,6 +4,7 @@ import { useAuth } from "@/context/useAuth";
 import { toast } from "sonner";
 import { ScaleLoader } from "react-spinners";
 import WatclistCard from "@/components/WatclistCard";
+import { Helmet } from "react-helmet-async";
 
 const Watchlist = () => {
   const { userWatchlist } = firestoreDb();
@@ -30,40 +31,68 @@ const Watchlist = () => {
   const totalItems = watchlist.length;
 
   return (
-    <section className="max-w-7xl w-full mx-auto px-5">
-      <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
-        <header>
-          <h3 className="text-sm md:text-xl uppercase font-bold">
-            {`My Watchlist - (${totalItems})`}
-          </h3>
-        </header>
-      </div>
+    <>
+      <Helmet>
+        <title>ReelsRadar • Watchlist</title>
+        <meta
+          name="description"
+          content="Explore from your collection of movies."
+        />
 
-      {isLoading && (
-        <div className="flex justify-center mt-10">
-          <ScaleLoader color="#22c55e" />
-        </div>
-      )}
+        {/* OG Tags */}
+        <meta name="og:title" content="ReelsRadar • Watchlist" />
+        <meta
+          name="og:description"
+          content="Explore from your collection of movies."
+        />
+        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:url" content="https://reelsradar.netlify.app/watchlist" />
 
-      {!isLoading && watchlist?.length === 0 && (
-        <div className="flex justify-center items-center">
-          <h3>Watchlist is Empty, start adding to watchlist now</h3>
-        </div>
-      )}
+        {/* TwitterTags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ReelsRadar • Watchlist" />
+        <meta
+          name="twitter:description"
+          content="Explore from your collection of movies."
+        />
+        <meta name="twitter:image" content="/public/movie_reel.png" />
+      </Helmet>
 
-      {!isLoading && watchlist?.length > 0 && (
-        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-          {watchlist?.map((item) => (
-            <WatclistCard
-              key={item?.id}
-              item={item}
-              type={item?.type}
-              setWatchlist={setWatchlist}
-            />
-          ))}
+      <section className="max-w-7xl w-full mx-auto px-5">
+        <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
+          <header>
+            <h3 className="text-sm md:text-xl uppercase font-bold">
+              {`My Watchlist - (${totalItems})`}
+            </h3>
+          </header>
         </div>
-      )}
-    </section>
+
+        {isLoading && (
+          <div className="flex justify-center mt-10">
+            <ScaleLoader color="#22c55e" />
+          </div>
+        )}
+
+        {!isLoading && watchlist?.length === 0 && (
+          <div className="flex justify-center items-center">
+            <h3>Watchlist is Empty, start adding to watchlist now</h3>
+          </div>
+        )}
+
+        {!isLoading && watchlist?.length > 0 && (
+          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+            {watchlist?.map((item) => (
+              <WatclistCard
+                key={item?.id}
+                item={item}
+                type={item?.type}
+                setWatchlist={setWatchlist}
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </>
   );
 };
 

@@ -6,6 +6,7 @@ import Pagination from "@/components/Pagination";
 import { Input } from "@/components/ui/input";
 import { searchAll } from "@/services/api";
 import { ScaleLoader } from "react-spinners";
+import { Helmet } from "react-helmet-async";
 
 const Search = () => {
   const location = useLocation();
@@ -48,51 +49,79 @@ const Search = () => {
   };
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-5">
-      <h3 className="text-sm md:text-xl uppercase font-bold my-5">Search</h3>
-
-      <form onSubmit={handleSearch}>
-        <Input
-          placeholder="Search Movies, TV Shows..."
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+    <>
+      <Helmet>
+        <title>ReelsRadar • Search</title>
+        <meta
+          name="description"
+          content="Search for your favorite Movies and TV Shows effortlessly."
         />
-      </form>
 
-      {isLoading && (
-        <div className="flex justify-center items-center mt-20">
-          <ScaleLoader color="#22c55e" />
-        </div>
-      )}
-
-      {data?.length === 0 && !isLoading && (
-        <h3 className="text-center text-lg mt-10">
-          ...oops, no results found😢
-        </h3>
-      )}
-
-      <div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-5 gap-5">
-          {data?.length > 0 &&
-            !isLoading &&
-            data?.map((item) => (
-              <CardComponent
-                key={item?.id}
-                item={item}
-                type={item?.media_type}
-              />
-            ))}
-        </div>
-      </div>
-
-      {data?.length > 0 && !isLoading && (
-        <Pagination
-          activePage={activePage}
-          totalPages={totalPages}
-          setActivePage={handlePageChange}
+        {/* OG Tags */}
+        <meta name="og:title" content="ReelsRadar • Search" />
+        <meta
+          name="og:description"
+          content="Search for your favorite Movies and TV Shows effortlessly."
         />
-      )}
-    </div>
+        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:url" content="https://reelsradar.netlify.app/search" />
+
+        {/* TwitterTags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ReelsRadar • Search" />
+        <meta
+          name="twitter:description"
+          content="Search for your favorite Movies and TV Shows effortlessly."
+        />
+        <meta name="twitter:image" content="/public/movie_reel.png" />
+      </Helmet>
+
+      <section className="max-w-7xl w-full mx-auto px-5">
+        <h3 className="text-sm md:text-xl uppercase font-bold my-5">Search</h3>
+
+        <form onSubmit={handleSearch}>
+          <Input
+            placeholder="Search Movies, TV Shows..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+        </form>
+
+        {isLoading && (
+          <div className="flex justify-center items-center mt-20">
+            <ScaleLoader color="#22c55e" />
+          </div>
+        )}
+
+        {data?.length === 0 && !isLoading && (
+          <h3 className="text-center text-lg mt-10">
+            ...oops, no results found😢
+          </h3>
+        )}
+
+        <div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-5 gap-5">
+            {data?.length > 0 &&
+              !isLoading &&
+              data?.map((item) => (
+                <CardComponent
+                  key={item?.id}
+                  item={item}
+                  type={item?.media_type}
+                />
+              ))}
+          </div>
+        </div>
+
+        {data?.length > 0 && !isLoading && (
+          <Pagination
+            activePage={activePage}
+            totalPages={totalPages}
+            setActivePage={handlePageChange}
+          />
+        )}
+      </section>
+    </>
   );
 };
 
