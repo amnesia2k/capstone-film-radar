@@ -44,4 +44,8 @@ export const footerLinks = [
     label: "Contact",
     href: "mailto:tilewaolatoye17@gmail.com",
   },
+  {
+    label: "API",
+    href: "https://developer.themoviedb.org/reference/intro/getting-started",
+  },
 ];
