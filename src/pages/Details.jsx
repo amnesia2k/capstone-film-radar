@@ -126,7 +126,7 @@ const Details = () => {
         {/* OG Tags */}
         <meta name="og:title" content={title} />
         <meta name="og:description" content={details?.overview} />
-        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:image" content="/movie_reel.png" />
         <meta
           name="og:url"
           content="https://reelsradar.netlify.app/watchlist"
@@ -136,7 +136,7 @@ const Details = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={details?.overview} />
-        <meta name="twitter:image" content="/public/movie_reel.png" />
+        <meta name="twitter:image" content="/movie_reel.png" />
       </Helmet>
 
       <section>

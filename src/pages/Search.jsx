@@ -63,7 +63,7 @@ const Search = () => {
           name="og:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:image" content="/movie_reel.png" />
         <meta name="og:url" content="https://reelsradar.netlify.app/search" />
 
         {/* TwitterTags */}
@@ -73,7 +73,7 @@ const Search = () => {
           name="twitter:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta name="twitter:image" content="/public/movie_reel.png" />
+        <meta name="twitter:image" content="/movie_reel.png" />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">

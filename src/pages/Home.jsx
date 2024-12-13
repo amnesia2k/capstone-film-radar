@@ -33,7 +33,7 @@ const Home = () => {
           name="og:description"
           content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
         />
-        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:image" content="/movie_reel.png" />
         <meta name="og:url" content="https://reelsradar.netlify.app/" />
 
         {/* TwitterTags */}
@@ -43,7 +43,7 @@ const Home = () => {
           name="twitter:description"
           content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
         />
-        <meta name="twitter:image" content="/public/movie_reel.png" />
+        <meta name="twitter:image" content="/movie_reel.png" />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
