@@ -61,17 +61,17 @@ Follow the steps below to set up the project locally:
 
 ```
 film-radar/
-├── public/          # Public files
+├── public/          
 ├── src/
-│   ├── assets/      # Static assets like images
-│   ├── components/  # Reusable React components
-│   ├── contexts/  # Reusable Contexts
-│   ├── lib/  # Shadcn default utilities
-│   ├── pages/  # Application pages
-│   ├── services/       # Application main functions
-│   └── utils/       # Utility and helper functions
-├── README.md        # Project documentation
-└── package.json     # Project configuration
+│   ├── assets/      
+│   ├── components/  
+│   ├── contexts/  
+│   ├── lib/  
+│   ├── pages/  
+│   ├── services/       
+│   └── utils/       
+├── README.md        
+└── package.json     
 ```
 
 ## API Integration

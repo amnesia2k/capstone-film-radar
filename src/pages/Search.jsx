@@ -1,27 +1,32 @@
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import queryString from "query-string";
 import CardComponent from "@/components/common/CardComponent";
-import Loader from "@/components/common/Loader";
 import Pagination from "@/components/Pagination";
 import { Input } from "@/components/ui/input";
 import { searchAll } from "@/services/api";
-import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 
 const Search = () => {
-  const [searchInput, setSearchInput] = useState("");
-  const [searchValue, setSearchValue] = useState("");
-  const [activePage, setActivePage] = useState(1);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Parse query params
+  const { q = "", page = 1 } = queryString.parse(location.search);
+
+  const [searchValue, setSearchValue] = useState(q);
+  const [searchInput, setSearchInput] = useState(q);
+  const [activePage, setActivePage] = useState(Number(page));
   const [totalPages, setTotalPages] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
-    // TODO: Fetch movies/shows based on search input
     searchAll(searchInput, activePage)
       .then((res) => {
-        setData(res?.results);
-        setActivePage(res?.page);
-        setTotalPages(res?.total_pages);
+        setData(res?.results || []);
+        setTotalPages(res?.total_pages || 1);
       })
       .catch((err) => console.error(err, "err"))
       .finally(() => setIsLoading(false));
@@ -30,7 +35,18 @@ const Search = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     setSearchInput(searchValue);
+
+    // Update URL with the search query and reset the page to 1
+    navigate(`?q=${searchValue}&page=1`);
   };
+
+  const handlePageChange = (page) => {
+    setActivePage(page);
+
+    // Update the URL with the new page
+    navigate(`?q=${searchInput}&page=${page}`);
+  };
+
   return (
     <div className="max-w-7xl w-full mx-auto px-5">
       <h3 className="text-sm md:text-xl uppercase font-bold my-5">Search</h3>
@@ -56,21 +72,16 @@ const Search = () => {
       )}
 
       <div>
-        {/* <h3 className="text-sm md:text-xl uppercase font-bold my-5">Results</h3> */}
         <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-5 gap-5">
           {data?.length > 0 &&
             !isLoading &&
-            data?.map((item, idx) =>
-              isLoading ? (
-                <Loader key={idx} />
-              ) : (
-                <CardComponent
-                  key={item?.id}
-                  item={item}
-                  type={item?.media_type}
-                />
-              )
-            )}
+            data?.map((item) => (
+              <CardComponent
+                key={item?.id}
+                item={item}
+                type={item?.media_type}
+              />
+            ))}
         </div>
       </div>
 
@@ -78,7 +89,7 @@ const Search = () => {
         <Pagination
           activePage={activePage}
           totalPages={totalPages}
-          setActivePage={setActivePage}
+          setActivePage={handlePageChange}
         />
       )}
     </div>

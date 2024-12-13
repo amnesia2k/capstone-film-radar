@@ -226,7 +226,7 @@ const Details = () => {
         </h3>
         <div className="flex flex-col items-center">
           <VideoComp id={video?.key} />
-          <div className="flex my-10 pb-5 gap-5 max-w-7xl w-full mx-auto overflow-x-scroll">
+          <div className="flex my-10 pb-5 gap-5 max-w-7xl w-full mx-auto overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 scrollbar-thumb-rounded scrollbar-track-rounded">
             {videos &&
               videos?.map((item) => (
                 <div key={item?.id} className="min-w-[300px]">

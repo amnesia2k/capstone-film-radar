@@ -14,7 +14,6 @@ const WatclistCard = ({ type, item, setWatchlist }) => {
     removeFromDb(user.uid, item.id).then(() => {
       setWatchlist((prev) => prev.filter((ev) => ev.id !== item.id));
     });
-    // setWatchlist(watchlist.filter(i => i.id!== item.id))
   };
 
   const posterPath = item?.poster_path
@@ -26,39 +25,36 @@ const WatclistCard = ({ type, item, setWatchlist }) => {
     item?.release_date || item?.first_air_date
       ? new Date(item.release_date || item.first_air_date).getFullYear()
       : "Unknown";
+
   return (
     <Link to={`/${type}/${item?.id}`}>
-      <div
-        className="relative group transform transition-all hover:scale-105 z-10 rounded-lg shadow-lg overflow-hidden"
-        style={{ transition: "all 0.3s ease-in-out" }}
-      >
+      <div className="relative group transform transition-all hover:scale-105 z-10 rounded-lg shadow-lg overflow-hidden">
         <div
           className="absolute z-50 top-0 left-0 bg-red-500 p-[5px] rounded-br-md"
           onClick={handleRemove}
         >
           <Trash />
         </div>
-        {/* Movie Poster */}
+
         <img
           className="w-full h-full object-cover"
           src={posterPath}
-          alt={item?.title || item?.name}
+          alt={title}
+          onError={(e) => {
+            e.target.src =
+              "https://www.reelviews.net/resources/img/default_poster.jpg";
+          }}
         />
 
-        {/* Hover Details */}
         <div className="absolute inset-0 flex flex-col justify-end bg-black bg-opacity-70 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          {/* Rating */}
           <div className="flex items-center gap-1 absolute top-3 right-5">
             <StarIcon size={20} color="gold" />
             <h3 className="text-sm font-semibold">{voteAverage}</h3>
           </div>
 
-          {/* Title */}
           <h3 className="text-center font-bold text-lg px-2 truncate">
             {title}
           </h3>
-
-          {/* Release Year */}
           <h4 className="text-center text-sm pb-3">{releaseYear}</h4>
         </div>
       </div>

@@ -1,5 +1,4 @@
 import CardComponent from "@/components/common/CardComponent";
-import Loader from "@/components/common/Loader";
 import Pagination from "@/components/Pagination";
 import {
   Select,
@@ -12,6 +11,7 @@ import {
 import { getMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 import { movieGenres } from "./constants";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Movies = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
@@ -59,7 +59,9 @@ const Movies = () => {
   return (
     <div className="max-w-7xl w-full mx-auto px-5">
       <div className="flex items-center gap-4">
-        <h3 className="text-sm md:text-xl uppercase font-bold my-5">Discover Movies</h3>
+        <h3 className="text-sm md:text-xl uppercase font-bold my-5">
+          Discover Movies
+        </h3>
         <Select onValueChange={handleSelectChange} value={genres || sortBy}>
           <SelectTrigger className="w-[130px]">
             <SelectValue placeholder="Choose Category" />
@@ -82,7 +84,7 @@ const Movies = () => {
 
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {loading ? (
-          <Loader />
+          <Skeleton className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
         ) : (
           movies.map((item) => (
             <CardComponent key={item.id} item={item} type={"movie"} />
