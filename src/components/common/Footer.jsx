@@ -2,8 +2,8 @@ import { footerLinks } from ".";
 
 const Footer = () => {
   return (
-    <div className="mx-auto max-w-7xl px-5">
-      <div className="mt-10 py-5 border-t mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 text-base md:text-lg font-semibold">
+    <div className="mx-auto max-w-7xl lg:px-5">
+      <div className="mt-10 py-5 border-t mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center text-base md:text-lg font-semibold px-5 lg:px-0">
         <div className="flex gap-5">
           {footerLinks.map((link, idx) => (
             <a
@@ -18,7 +18,7 @@ const Footer = () => {
           ))}
         </div>
         <div>
-          <p>
+          <p className="text-center">
             &copy; 2024 | Made with 💛 by{" "}
             <a
               href="https://www.tiktok.com/@codewithkang"

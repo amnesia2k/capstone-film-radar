@@ -1,6 +1,6 @@
-# Travel Planner
+# Movie Database
 
-Tripyy is a feature-rich web application designed to streamline and enhance the travel planning experience. With Tripyy, users get to explore destinations, create itineraries, and manage travel details efficiently.
+ReelsRadar is an engaging and dynamic web application designed for movie enthusiasts to explore, discover, and track their favorite films effortlessly. Built using the powerful TMDB API, ReelsRadar provides users with access to an extensive database of movies, featuring detailed information such as genres, cast, release dates, and ratings.
 
 ## Features
 
