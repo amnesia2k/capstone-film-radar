@@ -12,6 +12,7 @@ import { getMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 import { movieGenres } from "./constants";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Helmet } from "react-helmet-async";
 
 const Movies = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
@@ -57,47 +58,75 @@ const Movies = () => {
   };
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-5">
-      <div className="flex items-center gap-4">
-        <h3 className="text-sm md:text-xl uppercase font-bold my-5">
-          Discover Movies
-        </h3>
-        <Select onValueChange={handleSelectChange} value={genres || sortBy}>
-          <SelectTrigger className="w-[130px]">
-            <SelectValue placeholder="Choose Category" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="popularity.desc">Popular</SelectItem>
-              <SelectItem value="vote_average.desc&vote_count.gte=1000">
-                Top Rated
-              </SelectItem>
-              {movieGenres.map((genre) => (
-                <SelectItem key={genre.id} value={String(genre.id)}>
-                  {genre.name}
+    <>
+      <Helmet>
+        <title>ReelsRadar • Movies</title>
+        <meta
+          name="description"
+          content="Explore, discover, and track your favorite movies effortlessly."
+        />
+
+        {/* OG Tags */}
+        <meta name="og:title" content="ReelsRadar • Movies" />
+        <meta
+          name="og:description"
+          content="Explore, discover, and track your favorite movies effortlessly."
+        />
+        <meta name="og:image" content="/public/movie_reel.png" />
+        <meta name="og:url" content="https://reelsradar.netlify.app/movies" />
+
+        {/* TwitterTags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ReelsRadar • Movies" />
+        <meta
+          name="twitter:description"
+          content="Explore, discover, and track your favorite movies effortlessly."
+        />
+        <meta name="twitter:image" content="/public/movie_reel.png" />
+      </Helmet>
+
+      <section className="max-w-7xl w-full mx-auto px-5">
+        <div className="flex items-center gap-4">
+          <h3 className="text-sm md:text-xl uppercase font-bold my-5">
+            Discover Movies
+          </h3>
+          <Select onValueChange={handleSelectChange} value={genres || sortBy}>
+            <SelectTrigger className="w-[130px]">
+              <SelectValue placeholder="Choose Category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="popularity.desc">Popular</SelectItem>
+                <SelectItem value="vote_average.desc&vote_count.gte=1000">
+                  Top Rated
                 </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+                {movieGenres.map((genre) => (
+                  <SelectItem key={genre.id} value={String(genre.id)}>
+                    {genre.name}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-        {loading ? (
-          <Skeleton className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
-        ) : (
-          movies.map((item) => (
-            <CardComponent key={item.id} item={item} type={"movie"} />
-          ))
-        )}
-      </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+          {loading ? (
+            <Skeleton className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
+          ) : (
+            movies.map((item) => (
+              <CardComponent key={item.id} item={item} type={"movie"} />
+            ))
+          )}
+        </div>
 
-      <Pagination
-        activePage={activePage}
-        totalPages={totalPages}
-        setActivePage={setActivePage}
-      />
-    </div>
+        <Pagination
+          activePage={activePage}
+          totalPages={totalPages}
+          setActivePage={setActivePage}
+        />
+      </section>
+    </>
   );
 };
 
