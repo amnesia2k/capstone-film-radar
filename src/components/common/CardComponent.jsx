@@ -37,7 +37,7 @@ const CardComponent = ({ item, type }) => {
           </div>
 
           {/* Title */}
-          <h3 className="text-center font-bold text-lg px-2 truncate">
+          <h3 className="text-center font-semibold md:font-bold md:text-lg px-2 truncate">
             {title}
           </h3>
 

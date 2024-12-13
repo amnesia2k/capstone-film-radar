@@ -112,7 +112,12 @@ const Navbar = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>
-                  Welcome, {user?.displayName} 😊
+                  <h3 className="text-base">
+                    Hello,{" "}
+                    <span className="md:font-bold italic md:text-lg">
+                      {user?.displayName}
+                    </span>
+                  </h3>
                 </DropdownMenuLabel>
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="cursor-pointer">

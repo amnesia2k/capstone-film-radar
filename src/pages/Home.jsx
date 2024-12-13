@@ -1,5 +1,5 @@
 import CardComponent from "@/components/common/CardComponent";
-import Loader from "@/components/common/Loader";
+import { Skeleton } from "@/components/ui/skeleton";
 import { trendingMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 
@@ -49,11 +49,11 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
         {data &&
           data?.map((item, idx) =>
             loading ? (
-              <Loader key={idx} />
+              <Skeleton key={idx} className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
             ) : (
               <CardComponent key={item?.id} item={item} type={item?.media_type} />
             )

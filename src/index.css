@@ -1,6 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Nunito", sans-serif;
+}
 
 @layer base {
   :root {
@@ -66,20 +72,6 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-/* HTML: <div class="loader"></div> */
-.loader {
-  width: 240px;
-  height: 360px;
-  background: 
-    linear-gradient(90deg,#0001 33%,#0005 50%,#0001 66%)
-    #c7c5c567;
-  background-size:300% 100%;
-  animation: l1 1s infinite linear;
-}
-@keyframes l1 {
-  0% {background-position: right}
 }
 
 .overlay:hover {

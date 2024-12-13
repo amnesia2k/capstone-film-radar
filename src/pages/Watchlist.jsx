@@ -27,15 +27,14 @@ const Watchlist = () => {
     }
   }, [user?.uid, userWatchlist]);
 
+  const totalItems = watchlist.length;
+
   return (
     <section className="max-w-7xl w-full mx-auto px-5">
       <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
         <header>
-          <h3
-            className="text-sm md:text-xl uppercase font-bold"
-            title="Trending"
-          >
-            My Watchlist
+          <h3 className="text-sm md:text-xl uppercase font-bold">
+            {`My Watchlist - (${totalItems})`}
           </h3>
         </header>
       </div>
