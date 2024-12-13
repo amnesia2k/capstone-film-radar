@@ -5,14 +5,16 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   setDoc,
 } from "firebase/firestore";
+import { useCallback } from "react";
 import { toast } from "sonner";
 
 export const firestoreDb = () => {
   const addToDb = async (collectionName, data) => {
     const docRef = await addDoc(collection(db, collectionName), data);
-    console.log("Document written with ID:", docRef.id);
+    // console.log("Document written with ID:", docRef.id);
   };
 
   const addToWatchlist = async (userId, dataId, data) => {
@@ -24,7 +26,7 @@ export const firestoreDb = () => {
       await setDoc(doc(db, "users", userId, "watchlist", dataId), data);
       toast.success("Added to watchlist!😊");
     } catch (error) {
-      console.log(error, "Error");
+      console.error(error, "Error");
       toast.error("An error occurred while adding to watchlist😢");
     }
   };
@@ -58,10 +60,21 @@ export const firestoreDb = () => {
     }
   };
 
+  const userWatchlist = useCallback(async (userId) => {
+    const snapshot = await getDocs(
+      collection(db, "users", userId, "watchlist")
+    );
+    const data = snapshot.docs.map((doc) => ({
+      ...doc.data(),
+    }));
+
+    return data;
+  }, []);
   return {
     addToDb,
     addToWatchlist,
     checkIfInWatchlist,
     removeFromDb,
+    userWatchlist,
   };
 };

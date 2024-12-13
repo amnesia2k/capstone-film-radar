@@ -17,10 +17,8 @@ const Search = () => {
   useEffect(() => {
     setIsLoading(true);
     // TODO: Fetch movies/shows based on search input
-    // console.log(searchInput, "Search");
     searchAll(searchInput, activePage)
       .then((res) => {
-        console.log(res, "res");
         setData(res?.results);
         setActivePage(res?.page);
         setTotalPages(res?.total_pages);
