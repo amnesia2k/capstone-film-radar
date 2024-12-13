@@ -1,27 +1,45 @@
 # ChangeLogs
 
 ## Pull Request: Development Branch
-**Branch:** dev branch 
-**Date Created:** December 9, 2024  
-**Merged into:** master  
 
-<!-- ### Summary of Changes:
-1. **Added Itinerary Management UI:**
-   - Created a new React component `ItineraryManager` for handling user travel plans.
-   - Integrated Tailwind CSS for responsive design.
+**Branch:** dev branch  
+**Date Created:** December 13, 2024  
+**Merged into:** master
 
-2. **API Integration:**
-   - Connected the Google Gemini API to fetch and display recommended destinations.
-   - Set up functionality for creating, updating, and deleting itinerary items.
+### Summary of Changes:
 
-3. **Interactive Map:**
-   - Implemented Google Maps API for users to visualize travel routes.
-   - Added a draggable marker for selecting destinations.
+1. **Project Setup:**
 
-4. **Bug Fixes:**
-   - Resolved an issue where API calls were failing due to missing headers.
-   - Fixed UI responsiveness on smaller screens.
+   - Initialized project structure and environment using React with Vite.
+   - Configured Tailwind CSS and ShadCN UI for styling.
+
+2. **Feature Implementation:**
+
+   - **Search Movies:** Implemented a dynamic search bar to find movies and TV shows by title, genre, or release year.
+   - **Movie Details Page:** Developed a detailed page to display movie synopses, cast, ratings, and release dates.
+   - **Trending Content:** Integrated trending movies and TV shows section on the homepage using the TMDB API.
+   - **Watchlist:** Added functionality for users to manage a watchlist (requires login).
+   - **Filter by Genre:** Created a filter feature to allow users to browse movies by genre and other categories.
+   - **Trailers:** Added trailers to the movie details page for a more engaging user experience.
+
+3. **Authentication:**
+
+   - Integrated Firebase Authentication for user login and registration.
+   - Implemented user-specific data management for watchlists.
+
+4. **API Integration:**
+
+   - Connected the TMDB API to fetch movie data, including trending, top-rated, and detailed information.
+
+5. **Responsive Design:**
+
+   - Ensured responsive UI across devices using Tailwind CSS.
+
+6. **Deployment:**
+   - Deployed the project on Netlify for live access.
 
 ### Next Steps:
-- Integrate budgeting tools.
-- Add weather forecast features to the itinerary page. -->
+
+- Implement a reviews and ratings system.
+- Enhance filtering capabilities with additional options like runtime and language.
+- Optimize the app for better performance and load times.

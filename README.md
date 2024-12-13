@@ -14,7 +14,7 @@ ReelsRadar is an engaging and dynamic web application designed for movie enthusi
 ## Tech Stack
 
 - **Frontend:** React, Tailwind CSS, Shadcn/UI
-- **Backend:** TMDB API (The Movie Database API) for movie data and details, Google FIrebase for Authentication and Database
+- **Backend:** TMDB API (The Movie Database API) for movie data and details, Google Firebase for Authentication and Database
 - **Deployment:** Netlify
 
 ## Installation
@@ -50,25 +50,29 @@ Follow the steps below to set up the project locally:
 
 ## Usage
 
-**Search Movies:** Use the search bar to find movies and TV shows.
-**Explore Genres:** Browse movies by genre and filter them by ratings or release dates.
-**Add to Favorites:** Click the heart icon to save movies to your favorites list.
-**Trending Movies:** Check out what’s trending on the homepage.
-**View Details:** Click on a movie to view its detailed page with cast, trailers, and ratings.
+- **Search Movies:** Use the search bar to find movies and TV shows.
+- **Explore Genres:** Browse movies by genre. <!-- and filter them by ratings or release dates. -->
+<!-- - **Add to Favorites:** Click the heart icon to save movies to your favorites list. -->
+- **Add to Watchlist:** Movies can be added to your watchlist, you need to logged in for this.
+- **Trending Movies:** Check out what’s trending on the homepage.
+- **View Details:** Click on a movie to view its detailed page with cast, trailers, and ratings.
 
-<!-- ## Folder Structure
+## Folder Structure
 
 ```
-travel-planner/
-├── src/
-│   ├── components/  # Reusable React components
-│   ├── pages/       # Application pages
-│   ├── assets/      # Static assets like images
-│   └── utils/       # Utility functions
+film-radar/
 ├── public/          # Public files
+├── src/
+│   ├── assets/      # Static assets like images
+│   ├── components/  # Reusable React components
+│   ├── contexts/  # Reusable Contexts
+│   ├── lib/  # Shadcn default utilities
+│   ├── pages/  # Application pages
+│   ├── services/       # Application main functions
+│   └── utils/       # Utility and helper functions
 ├── README.md        # Project documentation
 └── package.json     # Project configuration
-``` -->
+```
 
 ## API Integration
 
@@ -79,9 +83,9 @@ This app integrates the TMDB API to power the movie-related features, providing:
 - Data about trending and top-rated movies.
 - Search and filter capabilities for personalized movie exploration.
 
-<!-- ## UI -->
+## UI
 
-<!-- ![Travel Planner UI](./src/assets/test.png "Sample UI of Travel Planner") -->
+![ReelsRadar_UI_Screenshot](/public/ui_screenshot.png)
 
 ## Contributing
 
@@ -98,9 +102,9 @@ Contributions are welcome! To contribute:
    ```
 4. Open a pull request.
 
-<!-- ## License
+## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details. -->
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Contact
 
