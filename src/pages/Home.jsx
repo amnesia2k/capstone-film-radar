@@ -2,7 +2,7 @@ import CardComponent from "@/components/common/CardComponent";
 import { Skeleton } from "@/components/ui/skeleton";
 import { trendingMovies } from "@/services/api";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [data, setData] = useState([]);

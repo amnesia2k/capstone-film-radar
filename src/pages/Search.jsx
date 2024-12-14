@@ -6,7 +6,7 @@ import Pagination from "@/components/Pagination";
 import { Input } from "@/components/ui/input";
 import { searchAll } from "@/services/api";
 import { ScaleLoader } from "react-spinners";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const Search = () => {
   const location = useLocation();
@@ -63,7 +63,7 @@ const Search = () => {
           name="og:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta name="og:image" content="/movie_reel.png" />
+        <meta name="og:image" content="/movie_reel_pub.png" />
         <meta name="og:url" content="https://reelsradar.netlify.app/search" />
 
         {/* TwitterTags */}
@@ -73,7 +73,7 @@ const Search = () => {
           name="twitter:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta name="twitter:image" content="/movie_reel.png" />
+        <meta name="twitter:image" content="/movie_reel_pub.png" />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
