@@ -67,13 +67,13 @@ const Shows = () => {
         />
 
         {/* OG Tags */}
-        <meta name="og:title" content="ReelsRadar • TV Shows" />
+        <meta property="og:title" content="ReelsRadar • TV Shows" />
         <meta
-          name="og:description"
+          property="og:description"
           content="Explore, discover, and track your favorite TV Shows effortlessly."
         />
-        <meta name="og:image" content="/movie_reel_pub.png" />
-        <meta name="og:url" content="https://reelsradar.netlify.app/tv" />
+        <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta property="og:url" content="https://reelsradar.netlify.app/tv" />
 
         {/* TwitterTags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -82,7 +82,7 @@ const Shows = () => {
           name="twitter:description"
           content="Explore, discover, and track your favorite TV Shows effortlessly."
         />
-        <meta name="twitter:image" content="/movie_reel_pub.png" />
+        <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">

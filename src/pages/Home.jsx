@@ -29,13 +29,13 @@ const Home = () => {
           />
 
           {/* OG Tags */}
-          <meta name="og:title" content="ReelsRadar • Home" />
+          <meta property="og:title" content="ReelsRadar • Home" />
           <meta
-            name="og:description"
+            property="og:description"
             content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
           />
-          <meta name="og:image" content="/movie_reel_pub.png" />
-          <meta name="og:url" content="https://reelsradar.netlify.app/" />
+          <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+          <meta property="og:url" content="https://reelsradar.netlify.app/" />
 
           {/* TwitterTags */}
           <meta name="twitter:card" content="summary_large_image" />
@@ -44,7 +44,7 @@ const Home = () => {
             name="twitter:description"
             content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
           />
-          <meta name="twitter:image" content="/movie_reel_pub.png" />
+          <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
         </Helmet>
       </head>
 
