@@ -4,7 +4,7 @@ import { useAuth } from "@/context/useAuth";
 import { toast } from "sonner";
 import { ScaleLoader } from "react-spinners";
 import WatclistCard from "@/components/WatclistCard";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 
 const Watchlist = () => {
   const { userWatchlist } = firestoreDb();
@@ -45,7 +45,7 @@ const Watchlist = () => {
           name="og:description"
           content="Explore from your collection of movies."
         />
-        <meta name="og:image" content="/movie_reel.png" />
+        <meta name="og:image" content="/movie_reel_pub.png" />
         <meta name="og:url" content="https://reelsradar.netlify.app/search" />
 
         {/* TwitterTags */}
@@ -55,7 +55,7 @@ const Watchlist = () => {
           name="twitter:description"
           content="Explore from your collection of movies."
         />
-        <meta name="twitter:image" content="/movie_reel.png" />
+        <meta name="twitter:image" content="/movie_reel_pub.png" />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
