@@ -33,7 +33,7 @@ const WatclistCard = ({ type, item, setWatchlist }) => {
           className="absolute z-50 top-0 left-0 bg-red-500 p-[5px] rounded-br-md"
           onClick={handleRemove}
         >
-          <Trash />
+          <Trash color="white" />
         </div>
 
         <img

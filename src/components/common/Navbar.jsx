@@ -1,8 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-import { navLinks } from ".";
+import { mobileNavLinks, navLinks } from ".";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { LogOut, Menu, User2, Video, X } from "lucide-react";
+import { LogOut, Menu, Search, User2, Video, X } from "lucide-react";
 import { SwitchToggle } from "../switch-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { reel } from "@/assets";
@@ -92,7 +92,7 @@ const Navbar = () => {
               title={links.tooltip}
             >
               {/* Conditionally render icon or name */}
-              {links.icon ? <links.icon size={20} /> : links.name}
+              {links.icon ? <links.icon size={25} /> : links.name}
             </NavLink>
           ))}
           <div>
@@ -154,7 +154,10 @@ const Navbar = () => {
         </div>
 
         {/* sm to md screens */}
-        <div className="flex items-center lg:hidden gap-3">
+        <div className="flex items-center lg:hidden gap-5 md:gap-10">
+          <Link to={"/search"}>
+            <Search size={25} />
+          </Link>
           <div
             className="flex items-center justify-center rounded-full cursor-pointer"
             onClick={handleToggle}
@@ -210,9 +213,9 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Navlinks */}
+          {/* Sidebar Links */}
           <div className="flex flex-col gap-5 pl-5 font-semibold">
-            {navLinks.map((links) => (
+            {mobileNavLinks.map((links) => (
               <NavLink
                 key={links.id}
                 className={({ isActive }) =>

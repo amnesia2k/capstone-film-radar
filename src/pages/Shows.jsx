@@ -17,7 +17,9 @@ import { Helmet } from "react-helmet";
 const Shows = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
   const [shows, setShows] = useState([]);
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(() => {
+    return parseInt(sessionStorage.getItem("showActivePage"), 10) || 1;
+  });
   const [totalPages, setTotalPages] = useState(1);
   const [sortBy, setSortBy] = useState(
     () => sessionStorage.getItem("tvSortBy") || DEFAULT_SORT
@@ -40,6 +42,15 @@ const Shows = () => {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [activePage, sortBy, genres]);
+
+  // Save activePage to sessionStorage whenever it changes
+  useEffect(() => {
+    sessionStorage.setItem("showActivePage", activePage);
+  }, [activePage]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activePage]);
 
   const handleSelectChange = (value) => {
     if (value.includes(".")) {
@@ -72,7 +83,10 @@ const Shows = () => {
           property="og:description"
           content="Explore, discover, and track your favorite TV Shows effortlessly."
         />
-        <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          property="og:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
         <meta property="og:url" content="https://reelsradar.netlify.app/tv" />
 
         {/* TwitterTags */}
@@ -82,7 +96,10 @@ const Shows = () => {
           name="twitter:description"
           content="Explore, discover, and track your favorite TV Shows effortlessly."
         />
-        <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          name="twitter:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">

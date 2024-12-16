@@ -17,7 +17,9 @@ import { Helmet } from "react-helmet";
 const Movies = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
   const [movies, setMovies] = useState([]);
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(() => {
+    return parseInt(sessionStorage.getItem("movieActivePage"), 10) || 1;
+  });
   const [totalPages, setTotalPages] = useState(1);
   const [sortBy, setSortBy] = useState(
     () => sessionStorage.getItem("movieSortBy") || DEFAULT_SORT
@@ -40,6 +42,15 @@ const Movies = () => {
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [activePage, sortBy, genres]);
+
+  // Save activePage to sessionStorage whenever it changes
+  useEffect(() => {
+    sessionStorage.setItem("movieActivePage", activePage);
+  }, [activePage]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activePage]);
 
   const handleSelectChange = (value) => {
     if (value.includes(".")) {
@@ -72,8 +83,14 @@ const Movies = () => {
           property="og:description"
           content="Explore, discover, and track your favorite movies effortlessly."
         />
-        <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
-        <meta property="og:url" content="https://reelsradar.netlify.app/movies" />
+        <meta
+          property="og:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
+        <meta
+          property="og:url"
+          content="https://reelsradar.netlify.app/movies"
+        />
 
         {/* TwitterTags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -82,7 +99,10 @@ const Movies = () => {
           name="twitter:description"
           content="Explore, discover, and track your favorite movies effortlessly."
         />
-        <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          name="twitter:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
