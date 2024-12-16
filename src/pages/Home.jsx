@@ -20,33 +20,37 @@ const Home = () => {
 
   return (
     <>
-      <head>
-        <Helmet>
-          <title>ReelsRadar • Home</title>
-          <meta
-            name="description"
-            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-          />
+      <Helmet>
+        <title>ReelsRadar • Home</title>
+        <meta
+          name="description"
+          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+        />
 
-          {/* OG Tags */}
-          <meta property="og:title" content="ReelsRadar • Home" />
-          <meta
-            property="og:description"
-            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-          />
-          <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
-          <meta property="og:url" content="https://reelsradar.netlify.app/" />
+        {/* OG Tags */}
+        <meta property="og:title" content="ReelsRadar • Home" />
+        <meta
+          property="og:description"
+          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+        />
+        <meta
+          property="og:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
+        <meta property="og:url" content="https://reelsradar.netlify.app/" />
 
-          {/* TwitterTags */}
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content="ReelsRadar • Home" />
-          <meta
-            name="twitter:description"
-            content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
-          />
-          <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
-        </Helmet>
-      </head>
+        {/* TwitterTags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="ReelsRadar • Home" />
+        <meta
+          name="twitter:description"
+          content="Welcome to ReelsRadar. Explore, discover, and track your favorite films effortlessly."
+        />
+        <meta
+          name="twitter:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
+      </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
         <div className="flex flex-col md:flex-row items-baseline gap-4 my-5">
@@ -62,7 +66,7 @@ const Home = () => {
             <button
               className={`px-3 py-1 rounded-full hover:bg-green-200 hover:bg-opacity-50 ${
                 timeWindow === "day"
-                  ? "bg-green-200 bg-opacity-50 dark:text-black"
+                  ? "bg-primary dark:text-black"
                   : ""
               }`}
               onClick={() => setTimeWindow("day")}
@@ -72,7 +76,7 @@ const Home = () => {
             <button
               className={`px-3 py-1 rounded-full hover:bg-green-200 hover:bg-opacity-50 ${
                 timeWindow === "week"
-                  ? "bg-green-200 bg-opacity-50 dark:text-black"
+                  ? "bg-primary dark:text-black"
                   : ""
               }`}
               onClick={() => setTimeWindow("week")}

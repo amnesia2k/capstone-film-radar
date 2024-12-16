@@ -21,7 +21,7 @@ const Footer = () => {
           <p className="text-center">
             &copy; 2024 | Made with 💛 by{" "}
             <a
-              href="https://www.tiktok.com/@codewithkang"
+              href="https://www.tiktok.com/@ola_the_dev"
               className="underline text-primary"
               target="_blank"
               rel="noopener noreferrer"

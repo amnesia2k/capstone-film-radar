@@ -10,7 +10,7 @@ const Pagination = ({ activePage, totalPages, setActivePage }) => {
           variant="ghost"
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
-          className="bg-slate-300 rounded-full text-xs font-bold bg-opacity-80 text-black"
+          className="bg-primary rounded-full text-xs font-bold bg-opacity-80 text-black"
         >
           <ChevronLeft />
           Prev
@@ -19,7 +19,7 @@ const Pagination = ({ activePage, totalPages, setActivePage }) => {
           variant="ghost"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(activePage + 1)}
-          className="bg-slate-300 rounded-full text-xs font-bold bg-opacity-80 text-black"
+          className="bg-primary rounded-full text-xs font-bold bg-opacity-80 text-black"
         >
           Next
           <ChevronRight />
