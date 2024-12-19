@@ -6,6 +6,7 @@ import { ScaleLoader } from "react-spinners";
 import WatclistCard from "@/components/WatclistCard";
 import Pagination from "@/components/Pagination";
 import { Helmet } from "react-helmet";
+import { useSearchParams } from "react-router-dom";
 
 const Watchlist = () => {
   const { userWatchlist } = firestoreDb();
@@ -13,10 +14,16 @@ const Watchlist = () => {
   const [watchlist, setWatchlist] = useState([]);
   const [paginatedWatchlist, setPaginatedWatchlist] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activePage, setActivePage] = useState(() => {
-    return parseInt(sessionStorage.getItem("watchlistPage"), 10) || 1;
-  });
-  const [itemsPerPage] = useState(24);
+  const [itemsPerPage] = useState(20);
+
+  // React Router's query parameters for pagination
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // activePage from query params or sessionStorage (with a fallback to 1)
+  const activePage =
+    parseInt(searchParams.get("page"), 10) ||
+    parseInt(sessionStorage.getItem("watchlistPage"), 10) ||
+    1;
 
   useEffect(() => {
     if (user?.uid) {
@@ -40,10 +47,11 @@ const Watchlist = () => {
     setPaginatedWatchlist(watchlist.slice(startIndex, endIndex));
   }, [activePage, watchlist, itemsPerPage]);
 
-  // Save activePage to sessionStorage whenever it changes
+  // Save activePage to sessionStorage and update query params
   useEffect(() => {
-    sessionStorage.setItem("watchlistPage", activePage);
-  }, [activePage]);
+    sessionStorage.setItem("watchlistPage", activePage); // Save to sessionStorage
+    setSearchParams({ page: activePage.toString() }); // Update URL query params
+  }, [activePage, setSearchParams]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -51,6 +59,13 @@ const Watchlist = () => {
 
   const totalItems = watchlist.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const setActivePage = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      sessionStorage.setItem("watchlistPage", page); // Update sessionStorage
+      setSearchParams({ page: page.toString() }); // Update query params
+    }
+  };
 
   return (
     <>
@@ -60,7 +75,6 @@ const Watchlist = () => {
           name="description"
           content="Explore from your collection of movies."
         />
-        {/* OG and Twitter meta tags */}
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">

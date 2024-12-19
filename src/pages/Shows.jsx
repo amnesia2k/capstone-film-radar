@@ -11,8 +11,8 @@ import {
 import { getShows } from "@/services/api";
 import { useEffect, useState } from "react";
 import { tvGenres } from "./constants";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
+import CardSkeleton from "./constants/CardSkeleton";
 
 const Shows = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
@@ -128,14 +128,27 @@ const Shows = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-          {loading ? (
+          {/* {loading ? (
             <Skeleton className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
           ) : (
             shows.map((item) => (
               <CardComponent key={item.id} item={item} type={"tv"} />
             ))
-          )}
+          )} */}
+          {shows &&
+            shows?.map((item, idx) =>
+              loading ? (
+                <CardSkeleton
+                  key={idx}
+                  className="w-[170px] h-[150px] md:w-[240px] md:h-[360px] lg:h-[400px]"
+                />
+              ) : (
+                <CardComponent key={item?.id} item={item} type={"tv"} />
+              )
+            )}
         </div>
+
+        {/* Remember to fix this during the day */}
 
         <Pagination
           activePage={activePage}

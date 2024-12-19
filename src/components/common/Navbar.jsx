@@ -4,8 +4,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { LogOut, Menu, Search, User2, Video, X } from "lucide-react";
 import { SwitchToggle } from "../switch-toggle";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { reel } from "@/assets";
+import { logo } from "@/assets";
 import { useAuth } from "@/context/useAuth";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import {
@@ -23,7 +22,7 @@ import { toast } from "sonner";
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const { user, signInWithGoogle, logout } = useAuth();
-  const [googleUser, setGoogleUser] = useState(null);
+  // const [googleUser, setGoogleUser] = useState(null);
   // const [open, setOpen] = useState(false);
 
   const handleToggle = () => setMobile(true);
@@ -31,7 +30,7 @@ const Navbar = () => {
   const handleLogin = async () => {
     try {
       const res = await signInWithGoogle();
-      const user = res.user;
+      const user = res?.user;
       const credential = GoogleAuthProvider.credentialFromResult(res);
       const token = credential.accessToken;
       if (token) {
@@ -39,7 +38,7 @@ const Navbar = () => {
       } else {
         console.warn("no access token was received");
       }
-      setGoogleUser(user);
+      // setGoogleUser(user);
       toast.success(`Signed in as ${user?.displayName} successfully`);
       console.log(user, token, "success");
     } catch (error) {
@@ -51,7 +50,7 @@ const Navbar = () => {
     try {
       await logout();
       localStorage.removeItem("userToken");
-      setGoogleUser(null);
+      // setGoogleUser(null);
       toast.success(`Logged out of ${user?.displayName} successfully`);
     } catch (error) {
       console.error(error, "error");
@@ -59,20 +58,20 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white dark:bg-[#0c0a09] shadow-md border-b">
-      {" "}
+    <header className="shadow-md bg-primary-foreground dark:bg-background">
+      {/*dark:bg-[#0c0a09]*/}{" "}
       {/*sticky top-0 z-50 mx-auto might add back later*/}
-      <nav className="max-w-7xl w-full mx-auto py-[10px] px-5 flex items-center justify-between">
+      <nav className="max-w-7xl w-full mx-auto p-5 flex items-center justify-between">
         <Link
           to="/"
-          className="flex items-center text-lg md:text-2xl uppercase hove:scale-105 transition-all font-semibold"
+          className="flex items-center text-lg md:text-2xl uppercase transform transition-all hover:scale-110 font-semibold"
         >
           <img
-            src={reel}
-            className="w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
+            src={logo}
+            className="w-[30px] h-[30px] md:w-[40px] md:h-[40px]"
             alt="movie_reel"
           />
-          <span className="text-primary text-lg md:text-xl">
+          <span className="text-primary text-lg md:text-xl lg:text-2xl">
             <span className="text-2xl md:text-3xl font-bold">R</span>eels
           </span>
           <span className="text-lg md:text-xl">
@@ -173,20 +172,16 @@ const Navbar = () => {
         open={mobile}
         onClose={setMobile}
       >
-        <div className="fixed inset-0 z-50 bg-white dark:bg-[#0c0a09] max-w-[450px] w-[80%] md:w-[40%]" />
+        <div className="fixed inset-0 z-50 bg-white dark:bg-background bg-backgroundImg bg-cover bg-center max-w-[450px] w-[80%] md:w-[40%]" />
         <DialogPanel className="fixed inset-y-0 left-0 z-50 overflow-y-auto py-[10px] w-[70%]">
           <div className="flex items-center justify-between mb-3 pb-[12px]">
             {user ? (
               <div className="flex items-center gap-2 pl-5 mt-[10px]">
-                <Avatar className="w-[30px] h-[30px]">
-                  <AvatarImage src={user.photoURL} className="cursor-pointer" />
-                  <AvatarFallback className="cursor-pointer">
-                    <AvatarImage
-                      src={user.photoURL}
-                      className="cursor-pointer"
-                    />
-                  </AvatarFallback>
-                </Avatar>
+                <img
+                  src={user?.photoURL}
+                  className="w-[40px] h-[40px] rounded-full object-contain"
+                  alt={user?.displayName}
+                />
                 <div className="flex">
                   <h3 className="md:font-semibold">
                     Hello,{" "}

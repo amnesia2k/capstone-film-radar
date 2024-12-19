@@ -5,7 +5,7 @@ import {
   imgPathResolve,
   originalImgPathResolve,
 } from "@/services/api";
-import { Calendar, CheckCircle, Clock, PlusIcon } from "lucide-react";
+import { CheckCircle, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ScaleLoader } from "react-spinners";
@@ -20,8 +20,10 @@ import { toast } from "sonner";
 import { useAuth } from "@/context/useAuth";
 import { firestoreDb } from "@/services/firestore";
 import { Helmet } from "react-helmet";
+import { useTheme } from "@/components/theme-provider";
 
 const Details = () => {
+  const { theme } = useTheme();
   const { type, id } = useParams();
   const { user } = useAuth();
   const { addToWatchlist, checkIfInWatchlist, removeFromDb } = firestoreDb();
@@ -84,7 +86,6 @@ const Details = () => {
     await addToWatchlist(user?.uid, dataId, data);
     const isSetToWatchlist = await checkIfInWatchlist(user?.uid, dataId);
     setIsInWatchlist(isSetToWatchlist);
-    // addToDb("watchlist", data);
   };
 
   useEffect(() => {
@@ -113,9 +114,13 @@ const Details = () => {
   }
   const posterPath = details?.poster_path
     ? `${imgPathResolve}/${details.poster_path}`
-    : "https://www.reelviews.net/resources/img/default_poster.jpg"; // Replace with a valid placeholder image path
+    : "https://www.reelviews.net/resources/img/default_poster.jpg";
   const title = details?.title || details?.name;
   const date = type === "tv" ? details?.first_air_date : details?.release_date;
+  const lastAirDate = type === "tv" ? details?.last_air_date : "";
+  const backdropBanner = details?.backdrop_path
+    ? `${originalImgPathResolve}/${details?.backdrop_path}`
+    : ``;
 
   return (
     <>
@@ -126,7 +131,10 @@ const Details = () => {
         {/* OG Tags */}
         <meta property="og:title" content={title} />
         <meta property="og:description" content={details?.overview} />
-        <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          property="og:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
         <meta
           property="og:url"
           content="https://reelsradar.netlify.app/watchlist"
@@ -136,10 +144,206 @@ const Details = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={details?.overview} />
-        <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          name="twitter:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
       </Helmet>
 
-      <section>
+      <section className="max-w-7xl w-full mx-auto px-5">
+        <div className="flex flex-col gap-[90px]">
+          <div className="relative mt-5">
+            <img
+              src={backdropBanner}
+              className="opacity-70 rounded-xl"
+              alt="backdrop_banner"
+            />
+            <div className="absolute bottom-[-40px] left-4 text-white md:left-20 w-[90%] md:w-[50%] flex flex-col px-3 md:px-5 py-3 rounded-xl bg-primary">
+              <h3>ReelsRadar || {type === "tv" ? "TV Show" : "Movie"}</h3>
+              <h1 className="text-lg md:text-2xl truncate font-bold">
+                {title}
+              </h1>
+            </div>
+          </div>
+
+          <div className="flex justify-center md:justify-start gap-5 flex-col md:flex-row">
+            <div className="flex justify-center items-center md:block flex-shrink-0">
+              <img
+                src={posterPath}
+                className="w-[220px] lg:w-[300px] h-[300px] md:h-[350px] lg:h-[450px] rounded-xl"
+                alt={title}
+              />
+            </div>
+            <div className="text-center md:text-left">
+              {/* Overview */}
+              <div className="flex flex-col gap-3">
+                <h1 className="text-base md:text-xl font-semibold italic">
+                  {details?.tagline}
+                </h1>
+                <h2 className="text-base md:text-lg font-semibold">
+                  Overview: <br />
+                  <span className="text-base italic">
+                    <span className="text-2xl font-bold">&#8220;{/* */}</span>
+                    {details?.overview}
+                  </span>
+                </h2>
+
+                {/* CTA */}
+                <div className="flex gap-3 items-center justify-center md:justify-start">
+                  <div className="flex gap-2 items-center">
+                    <div className="w-[45px] h-[45px] flex justify-center items-center">
+                      <CircularProgressbar
+                        value={toPercentage(details?.vote_average)}
+                        strokeWidth={12}
+                        text={`${toPercentage(details?.vote_average)}%`}
+                        className="rounded-full"
+                        styles={buildStyles({
+                          textSize: "25px",
+                          textColor: theme === "light" ? "black" : "white",
+                          pathColor: resColor(details?.vote_average),
+                        })}
+                      />
+                    </div>
+                    <h3 className="hidden md:block">User Score</h3>
+                  </div>
+                  {isInWatchlist ? (
+                    <Button
+                      variant="ghost"
+                      onClick={handleDelete}
+                      className="border border-primary hover:bg-transparent text-green-200 hover:text-green-200"
+                    >
+                      <CheckCircle />
+                      <span>In Watchlist</span>
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="ghost"
+                      onClick={toWatchlist}
+                      className="border hover:bg-transparent hover:text-green-200"
+                    >
+                      <PlusIcon />
+                      <span>Add to Watchlist</span>
+                    </Button>
+                  )}
+                </div>
+
+                {/* Show Stats */}
+                <div className="flex flex-col md:flex-row gap-3 md:gap-10 xl:gap-20">
+                  <div className="flex flex-col gap-[5px]">
+                    <div className="flex flex-col">
+                      <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                        Type
+                      </h3>
+                      <h2 className="text-[13px] md:text-[15px] font-normal">
+                        {type === "tv" ? "TV Show" : "Movie"}
+                      </h2>
+                    </div>
+                    <div className="flex flex-col">
+                      <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                        {type === "movie" ? "Released date" : "First Air date"}
+                      </h3>
+                      <h2 className="text-[13px] md:text-[15px] font-normal">
+                        {new Date(date).toLocaleDateString("en-US")} (US)
+                      </h2>
+                    </div>
+                    {type === "movie" ? (
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                          Runtime
+                        </h3>
+                        <h2 className="text-[13px] md:text-[15px] font-normal">
+                          {minsToHours(details?.runtime)}
+                        </h2>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                          Seasons
+                        </h3>
+                        <h2 className="text-[13px] md:text-[15px] font-normal">
+                          {details?.number_of_seasons > 1
+                            ? `${details.number_of_seasons} seasons`
+                            : `${details.number_of_seasons} season`}
+                        </h2>
+                      </div>
+                    )}
+                  </div>
+
+                  {type === "tv" ? (
+                    <div className="flex flex-col gap-[5px]">
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                          Status
+                        </h3>
+                        <h2 className="text-[13px] md:text-[15px] font-normal">
+                          {details?.status}
+                        </h2>
+                      </div>
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                          Last air date
+                        </h3>
+                        <h2 className="text-[13px] md:text-[15px] font-normal">
+                          {new Date(lastAirDate).toLocaleDateString("en-US")}{" "}
+                          (US)
+                        </h2>
+                      </div>
+                      <div className="flex flex-col">
+                        <h3 className="text-[17px] md:text-[20px] font-semibold italic">
+                          Number of Episodes
+                        </h3>
+                        <h2 className="text-[13px] md:text-[15px] font-normal">
+                          {details?.number_of_episodes}
+                        </h2>
+                      </div>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                </div>
+
+                {/* Genres Bagde */}
+                <div className="flex items-center md:justify-start gap-2 flex-wrap justify-center">
+                  {details?.genres?.map((genre) => (
+                    <Badge
+                      key={genre?.key}
+                      className="bg-slate-500 bg-opacity-50 text-white hover:bg-slate-800"
+                    >
+                      {genre?.name}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl w-full mx-auto flex items-center">
+          <CastBox credits={credits} />
+        </div>
+
+        <div className="max-w-7xl w-full mx-auto">
+          <h3 className="text-xl text-center md:text-left uppercase font-bold my-5">
+            Watch Trailer
+          </h3>
+          <div className="flex flex-col items-center">
+            <VideoComp id={video?.key} />
+            <div className="flex my-10 pb-5 gap-5 max-w-7xl w-full mx-auto overflow-x-scroll scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 scrollbar-thumb-rounded scrollbar-track-rounded">
+              {videos &&
+                videos?.map((item) => (
+                  <div key={item?.id} className="min-w-[300px]">
+                    <VideoComp id={item.key} small />
+                    <h3 className="line-clamp-2 text-lg font-semibold">
+                      {item?.name}
+                    </h3>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <section>
         <div
           className="w-full h-auto md:h-[500px] flex items-center z-[-1]"
           style={{
@@ -261,7 +465,7 @@ const Details = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };
