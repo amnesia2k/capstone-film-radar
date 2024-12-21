@@ -26,7 +26,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              amnesia2k
+              ola_the_dev
             </a>
           </p>
         </div>

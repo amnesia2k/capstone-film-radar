@@ -11,8 +11,8 @@ import {
 import { getMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 import { movieGenres } from "./constants";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Helmet } from "react-helmet";
+import CardSkeleton from "./constants/CardSkeleton";
 
 const Movies = () => {
   const DEFAULT_SORT = "popularity.desc"; // Default sorting
@@ -106,7 +106,7 @@ const Movies = () => {
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4">
           <h3 className="text-sm md:text-xl uppercase font-bold my-5">
             Discover Movies
           </h3>
@@ -131,13 +131,17 @@ const Movies = () => {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-5">
-          {loading ? (
-            <Skeleton className="w-[170px] h-[240px] md:w-[240px] md:h-[360px] lg:h-[400px]" />
-          ) : (
-            movies.map((item) => (
-              <CardComponent key={item.id} item={item} type={"movie"} />
-            ))
-          )}
+          {movies &&
+            movies?.map((item, idx) =>
+              loading ? (
+                <CardSkeleton
+                  key={idx}
+                  className="w-[170px] h-[150px] md:w-[240px] md:h-[360px] lg:h-[400px]"
+                />
+              ) : (
+                <CardComponent key={item?.id} item={item} type={"movie"} />
+              )
+            )}
         </div>
 
         <Pagination

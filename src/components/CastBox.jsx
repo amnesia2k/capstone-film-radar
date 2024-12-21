@@ -6,14 +6,16 @@ import { imgPathResolve } from "@/services/api";
 const CastBox = ({ credits }) => {
   return (
     <div>
-      <h3 className="text-xl uppercase font-bold mt-10">Cast</h3>
+      <h3 className="text-xl text-center md:text-left uppercase font-bold mt-10">
+        Cast
+      </h3>
       <div className="flex flex-row flex-wrap mt-5 mb-10 gap-5">
         {credits?.length === 0 && <p>Uh oh, No Casts found!!😢</p>}
         {credits &&
           credits?.map((item) => (
             <div
               key={item?.id}
-              className="flex items-end gap-2 max-w-[350px] w-full mx-auto rounded-md shadow-md border"
+              className="flex items-end gap-2 max-w-[350px] w-full mx-auto rounded-md shadow-md border transform transition-all hover:scale-105"
             >
               <img
                 src={
