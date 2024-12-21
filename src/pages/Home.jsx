@@ -29,7 +29,7 @@ const Home = () => {
     let greetMsg = "";
     if (currHour <= 11) {
       greetMsg = "Good Morning!";
-    } else if (currHour <= 17) {
+    } else if (currHour <= 16) {
       greetMsg = "Good Afternoon!";
     } else {
       greetMsg = "Good Evening!";
