@@ -3,7 +3,7 @@ import { trendingMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import CardSkeleton from "./constants/CardSkeleton";
-import { actionClip } from "@/assets";
+// import { actionClip } from "@/assets";
 import { Button } from "@/components/ui/button";
 
 const Home = () => {
@@ -79,7 +79,11 @@ const Home = () => {
             loop
             muted
           >
-            <source src={actionClip} type="video/mp4" />
+            <source
+              // src={actionClip}
+              src="https://spiffy-pasca-367d84.netlify.app/Hero-Action-Clip.mp4"
+              type="video/mp4"
+            />
           </video>
           <div className="absolute inset-x-0 bottom-0 h-full gradient-theme-adaptive"></div>
           <div className="relative z-10 text-center flex flex-col items-center justify-center gap-3 text-white h-[60vh] md:h-[80vh]">
