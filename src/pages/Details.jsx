@@ -8,7 +8,7 @@ import {
 import { CheckCircle, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ScaleLoader } from "react-spinners";
+import { SkewLoader } from "react-spinners";
 import "react-circular-progressbar/dist/styles.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { minsToHours, resColor, toPercentage } from "@/utils/helpers";
@@ -108,7 +108,7 @@ const Details = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <ScaleLoader color="#22c55e" />
+        <SkewLoader color="#6d28d9" size={50} />
       </div>
     );
   }
@@ -152,13 +152,13 @@ const Details = () => {
 
       <section className="max-w-7xl w-full mx-auto px-5">
         <div className="flex flex-col gap-[90px]">
-          <div className="relative mt-5">
+          <div className="relative mt-5 mx-auto">
             <img
               src={backdropBanner}
               className="opacity-70 rounded-xl"
               alt="backdrop_banner"
             />
-            <div className="absolute bottom-[-40px] left-4 text-white md:left-20 w-[90%] md:w-[50%] flex flex-col px-3 md:px-5 py-3 rounded-xl bg-primary">
+            <div className="absolute bottom-[-40px] left-4 text-white md:left-20 w-[90%] md:w-[50%] flex flex-col px-3 md:px-5 py-3 rounded-xl bg-[#6d28d9] bg-opacity-30">
               <h3>ReelsRadar || {type === "tv" ? "TV Show" : "Movie"}</h3>
               <h1 className="text-lg md:text-2xl truncate font-bold">
                 {title}
@@ -228,9 +228,9 @@ const Details = () => {
                 </div>
 
                 {/* Show Stats */}
-                <div className="flex flex-col md:flex-row gap-3 md:gap-10 xl:gap-20">
+                <div className="flex flex-row gap-3 md:gap-10 xl:gap-20">
                   <div className="flex flex-col gap-[5px]">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                         Type
                       </h3>
@@ -238,7 +238,7 @@ const Details = () => {
                         {type === "tv" ? "TV Show" : "Movie"}
                       </h2>
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-left">
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                         {type === "movie" ? "Released date" : "First Air date"}
                       </h3>
@@ -247,7 +247,7 @@ const Details = () => {
                       </h2>
                     </div>
                     {type === "movie" ? (
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-left">
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Runtime
                         </h3>
@@ -256,7 +256,7 @@ const Details = () => {
                         </h2>
                       </div>
                     ) : (
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-left">
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Seasons
                         </h3>
@@ -271,7 +271,7 @@ const Details = () => {
 
                   {type === "tv" ? (
                     <div className="flex flex-col gap-[5px]">
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-right">
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Status
                         </h3>
@@ -279,7 +279,7 @@ const Details = () => {
                           {details?.status}
                         </h2>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-right">
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Last air date
                         </h3>
@@ -288,7 +288,7 @@ const Details = () => {
                           (US)
                         </h2>
                       </div>
-                      <div className="flex flex-col">
+                      <div className="flex flex-col text-right">
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Number of Episodes
                         </h3>

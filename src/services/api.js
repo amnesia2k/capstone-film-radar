@@ -18,7 +18,7 @@ export const trendingMovies = async (timeWindow = "day") => {
 // Movies & Series Details
 export const getDetails = async (type, id) => {
   const res = await axios.get(`${baseURL}/${type}/${id}?api_key=${apiKey}`);
-  console.log(res?.data);
+  // console.log(res?.data);
   return res?.data;
 };
 

@@ -5,8 +5,10 @@ import CardComponent from "@/components/common/CardComponent";
 import Pagination from "@/components/Pagination";
 import { Input } from "@/components/ui/input";
 import { searchAll } from "@/services/api";
-import { ScaleLoader } from "react-spinners";
+import { SkewLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
+import { SearchIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Search = () => {
   const location = useLocation();
@@ -63,8 +65,14 @@ const Search = () => {
           property="og:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta property="og:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
-        <meta property="og:url" content="https://reelsradar.netlify.app/search" />
+        <meta
+          property="og:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
+        <meta
+          property="og:url"
+          content="https://reelsradar.netlify.app/search"
+        />
 
         {/* TwitterTags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -73,23 +81,39 @@ const Search = () => {
           name="twitter:description"
           content="Search for your favorite Movies and TV Shows effortlessly."
         />
-        <meta name="twitter:image" content="https://reelsradar.netlify.app/movie_reel_pub.png" />
+        <meta
+          name="twitter:image"
+          content="https://reelsradar.netlify.app/movie_reel_pub.png"
+        />
       </Helmet>
 
       <section className="max-w-7xl w-full mx-auto px-5">
-        <h3 className="text-sm md:text-xl uppercase font-bold my-5">Search</h3>
+        <div className="max-w-3xl mx-auto w-full">
+          <h3 className="text-sm md:text-xl uppercase font-bold my-5">
+            Search Movies and TV Shows
+          </h3>
 
-        <form onSubmit={handleSearch}>
-          <Input
-            placeholder="Search Movies, TV Shows..."
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-        </form>
+          <form onSubmit={handleSearch}>
+            <div className="relative flex items-center">
+              <Input
+                placeholder="Search Movies, TV Shows..."
+                value={searchValue}
+                className="rounded-full p-6"
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+              <Button
+                variant="ghost"
+                className="w-10 h-10 absolute top-[5px] right-3 rounded-full"
+              >
+                <SearchIcon size={50} />
+              </Button>
+            </div>
+          </form>
+        </div>
 
         {isLoading && (
           <div className="flex justify-center items-center mt-20">
-            <ScaleLoader color="#22c55e" />
+            <SkewLoader color="#6d28d9" size={50} />
           </div>
         )}
 
@@ -100,7 +124,7 @@ const Search = () => {
         )}
 
         <div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-5 gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-10 gap-5">
             {data?.length > 0 &&
               !isLoading &&
               data?.map((item) => (

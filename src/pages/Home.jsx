@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import CardSkeleton from "./constants/CardSkeleton";
 // import { actionClip } from "@/assets";
 import { Button } from "@/components/ui/button";
+// import { mis } from "@/assets";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ const Home = () => {
     const currHour = new Date().getHours();
 
     let greetMsg = "";
-    if (currHour <= 12) {
+    if (currHour <= 11) {
       greetMsg = "Good Morning!";
     } else if (currHour <= 17) {
       greetMsg = "Good Afternoon!";
@@ -78,6 +79,8 @@ const Home = () => {
             autoPlay
             loop
             muted
+            // poster={mis}
+            // loading="lazy"
           >
             <source
               // src={actionClip}
