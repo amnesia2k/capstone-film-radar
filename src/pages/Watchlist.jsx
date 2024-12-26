@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { firestoreDb } from "@/services/firestore";
 import { useAuth } from "@/context/useAuth";
 import { toast } from "sonner";
-import { SkewLoader } from "react-spinners";
 import WatclistCard from "@/components/WatclistCard";
 import Pagination from "@/components/Pagination";
 import { Helmet } from "react-helmet";
 import { useSearchParams } from "react-router-dom";
+import Loader from "@/components/common/Loader";
 
 const Watchlist = () => {
   const { userWatchlist } = firestoreDb();
@@ -88,7 +88,7 @@ const Watchlist = () => {
 
         {isLoading && (
           <div className="flex justify-center mt-10">
-            <SkewLoader color="#6d28d9" size={50} />
+            <Loader />
           </div>
         )}
 

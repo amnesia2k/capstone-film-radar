@@ -71,7 +71,7 @@ const Navbar = () => {
             className="w-[30px] h-[30px] md:w-[40px] md:h-[40px]"
             alt="movie_reel"
           />
-          <span className="text-primary text-lg md:text-xl lg:text-2xl">
+          <span className="text-primary text-lg md:text-xl lg:text-2xl mr-1">
             <span className="text-2xl md:text-3xl font-bold">R</span>eels
           </span>
           <span className="text-lg md:text-xl">

@@ -5,10 +5,10 @@ import CardComponent from "@/components/common/CardComponent";
 import Pagination from "@/components/Pagination";
 import { Input } from "@/components/ui/input";
 import { searchAll } from "@/services/api";
-import { SkewLoader } from "react-spinners";
 import { Helmet } from "react-helmet";
 import { SearchIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/common/Loader";
 
 const Search = () => {
   const location = useLocation();
@@ -113,7 +113,7 @@ const Search = () => {
 
         {isLoading && (
           <div className="flex justify-center items-center mt-20">
-            <SkewLoader color="#6d28d9" size={50} />
+            <Loader />
           </div>
         )}
 
