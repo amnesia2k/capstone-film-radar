@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet";
 import CardSkeleton from "./constants/CardSkeleton";
 // import { actionClip } from "@/assets";
 import { Button } from "@/components/ui/button";
+import { heroClip } from "@/assets";
 // import { mis } from "@/assets";
 
 const Home = () => {
@@ -81,7 +82,8 @@ const Home = () => {
             muted
           >
             <source
-              src="https://spiffy-pasca-367d84.netlify.app/Hero-Action-Clip.mp4"
+              // src="https://spiffy-pasca-367d84.netlify.app/Hero-Action-Clip.mp4"
+              src={heroClip}
               type="video/mp4"
             />
           </video>
