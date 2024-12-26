@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 import PropTypes from "prop-types";
 
@@ -7,28 +7,26 @@ const Pagination = ({ activePage, totalPages, setActivePage }) => {
     <div className="flex justify-center md:justify-start item-center gap-5">
       <div className="flex items-center gap-2 my-10">
         <Button
-          variant="ghost"
+          variant="outline"
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
-          className="bg-primary rounded-full text-xs font-bold bg-opacity-80 text-black"
+          className={`rounded-full text-white`}
         >
-          <ChevronLeft />
-          Prev
-        </Button>
-        <Button
-          variant="ghost"
-          disabled={activePage === totalPages}
-          onClick={() => setActivePage(activePage + 1)}
-          className="bg-primary rounded-full text-xs font-bold bg-opacity-80 text-black"
-        >
-          Next
-          <ChevronRight />
+          <ArrowLeft />
         </Button>
         <div>
           <h3 className="text-sm md:text-basefont-semibold">
             {activePage} of {totalPages}
           </h3>
         </div>
+        <Button
+          variant="outline"
+          disabled={activePage === totalPages}
+          onClick={() => setActivePage(activePage + 1)}
+          className="rounded-full text-white"
+        >
+          <ArrowRight />
+        </Button>
       </div>
     </div>
   );

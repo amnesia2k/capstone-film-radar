@@ -8,7 +8,6 @@ import {
 import { CheckCircle, PlusIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { SkewLoader } from "react-spinners";
 import "react-circular-progressbar/dist/styles.css";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import { minsToHours, resColor, toPercentage } from "@/utils/helpers";
@@ -21,6 +20,7 @@ import { useAuth } from "@/context/useAuth";
 import { firestoreDb } from "@/services/firestore";
 import { Helmet } from "react-helmet";
 import { useTheme } from "@/components/theme-provider";
+import Loader from "@/components/common/Loader";
 
 const Details = () => {
   const { theme } = useTheme();
@@ -43,6 +43,7 @@ const Details = () => {
           getCredits(type, id),
           getVideos(type, id),
         ]);
+        console.log(detailsData);
 
         setDetails(detailsData); //movie details data
         setCredits(creditData?.cast?.slice(0, 10)); //credit details data
@@ -108,7 +109,7 @@ const Details = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <SkewLoader color="#6d28d9" size={50} />
+        <Loader />
       </div>
     );
   }
@@ -121,11 +122,16 @@ const Details = () => {
   const backdropBanner = details?.backdrop_path
     ? `${originalImgPathResolve}/${details?.backdrop_path}`
     : ``;
+  const movieYear = new Date(details?.release_date).getFullYear().toString();
+  const showYear = new Date(details?.first_air_date).getFullYear().toString();
+  const releaseYear = type === "movie" ? movieYear : showYear;
 
   return (
     <>
       <Helmet>
-        <title>{title}</title>
+        <title>
+          {title} ({releaseYear})
+        </title>
         <meta name="description" content={details?.overview} />
 
         {/* OG Tags */}
@@ -210,7 +216,7 @@ const Details = () => {
                     <Button
                       variant="ghost"
                       onClick={handleDelete}
-                      className="border border-primary hover:bg-transparent text-green-200 hover:text-green-200"
+                      className="border border-green-200 hover:bg-transparent text-green-200 hover:text-green-200"
                     >
                       <CheckCircle />
                       <span>In Watchlist</span>
@@ -228,7 +234,11 @@ const Details = () => {
                 </div>
 
                 {/* Show Stats */}
-                <div className="flex flex-row gap-3 md:gap-10 xl:gap-20">
+                <div
+                  className={`flex flex-row ${
+                    type === "tv" ? "justify-center md:justify-start" : ""
+                  } gap-3 md:gap-10 xl:gap-20`}
+                >
                   <div className="flex flex-col gap-[5px]">
                     <div className="flex flex-col text-left">
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">

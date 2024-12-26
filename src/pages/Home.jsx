@@ -79,11 +79,8 @@ const Home = () => {
             autoPlay
             loop
             muted
-            // poster={mis}
-            // loading="lazy"
           >
             <source
-              // src={actionClip}
               src="https://spiffy-pasca-367d84.netlify.app/Hero-Action-Clip.mp4"
               type="video/mp4"
             />
@@ -92,7 +89,6 @@ const Home = () => {
           <div className="relative z-10 text-center flex flex-col items-center justify-center gap-3 text-white h-[60vh] md:h-[80vh]">
             <h3 className="text-3xl md:text-4xl font-bold">{greeting}</h3>
             <h3 className="sm:text-xl font-semibold mb-10">
-              {/* Tagline */}
               Discover the Latest and Greatest in Movies. <br />{" "}
               <span className="text-primary sm:text-2xl">ReelsRadar</span>,
               Where Every Reel Tells a Story
