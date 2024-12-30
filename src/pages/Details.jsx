@@ -236,11 +236,17 @@ const Details = () => {
                 {/* Show Stats */}
                 <div
                   className={`flex flex-row ${
-                    type === "tv" ? "justify-center md:justify-start" : ""
+                    type === "tv"
+                      ? "justify-center md:justify-start"
+                      : "justify-center md:justify-start"
                   } gap-3 md:gap-10 xl:gap-20`}
                 >
                   <div className="flex flex-col gap-[5px]">
-                    <div className="flex flex-col text-left">
+                    <div
+                      className={`flex flex-col text-left ${
+                        type === "movie" ? "text-center" : ""
+                      }`}
+                    >
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                         Type
                       </h3>
@@ -248,7 +254,11 @@ const Details = () => {
                         {type === "tv" ? "TV Show" : "Movie"}
                       </h2>
                     </div>
-                    <div className="flex flex-col text-left">
+                    <div
+                      className={`flex flex-col text-left ${
+                        type === "movie" ? "text-center" : ""
+                      }`}
+                    >
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                         {type === "movie" ? "Released date" : "First Air date"}
                       </h3>
@@ -257,7 +267,11 @@ const Details = () => {
                       </h2>
                     </div>
                     {type === "movie" ? (
-                      <div className="flex flex-col text-left">
+                      <div
+                        className={`flex flex-col text-left ${
+                          type === "movie" ? "text-center" : ""
+                        }`}
+                      >
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
                           Runtime
                         </h3>
