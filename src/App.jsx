@@ -10,6 +10,7 @@ import Shows from "./pages/Shows";
 import { RouterProvider } from "react-router";
 import { ThemeProvider } from "./components/theme-provider";
 import Search from "./pages/Search";
+import Error from "./pages/Error";
 import Details from "./pages/Details";
 import { AuthProvider } from "./context/authProvider";
 import { Toaster } from "sonner";
@@ -32,6 +33,7 @@ const myRoutes = createBrowserRouter(
           </Protected>
         }
       />
+      <Route path="*" element={<Error />} />
     </Route>
   )
 );
