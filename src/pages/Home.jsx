@@ -12,8 +12,8 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeWindow, setTimeWindow] = useState("day");
-  const [greeting, setGreeting] = useState("");
   const { user } = useAuth();
+  const [greeting, setGreeting] = useState(() => timeForGreeting(user));
 
   useEffect(() => {
     setLoading(true);

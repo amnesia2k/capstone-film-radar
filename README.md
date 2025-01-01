@@ -51,8 +51,7 @@ Follow the steps below to set up the project locally:
 ## Usage
 
 - **Search Movies:** Use the search bar to find movies and TV shows.
-- **Explore Genres:** Browse movies by genre. <!-- and filter them by ratings or release dates. -->
-<!-- - **Add to Favorites:** Click the heart icon to save movies to your favorites list. -->
+- **Explore Genres:** Browse movies by genre.
 - **Add to Watchlist:** Movies can be added to your watchlist, you need to logged in for this.
 - **Trending Movies:** Check out what’s trending on the homepage.
 - **View Details:** Click on a movie to view its detailed page with cast, trailers, and ratings.
@@ -61,17 +60,17 @@ Follow the steps below to set up the project locally:
 
 ```
 film-radar/
-├── public/          
+├── public/
 ├── src/
-│   ├── assets/      
-│   ├── components/  
-│   ├── contexts/  
-│   ├── lib/  
-│   ├── pages/  
-│   ├── services/       
-│   └── utils/       
-├── README.md        
-└── package.json     
+│   ├── assets/
+│   ├── components/
+│   ├── contexts/
+│   ├── lib/
+│   ├── pages/
+│   ├── services/
+│   └── utils/
+├── README.md
+└── package.json
 ```
 
 ## API Integration
@@ -101,10 +100,6 @@ Contributions are welcome! To contribute:
    git push -u origin feature-name
    ```
 4. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Contact
 
