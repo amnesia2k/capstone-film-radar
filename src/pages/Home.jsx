@@ -3,16 +3,17 @@ import { trendingMovies } from "@/services/api";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import CardSkeleton from "./constants/CardSkeleton";
-// import { actionClip } from "@/assets";
 import { Button } from "@/components/ui/button";
 import { heroClip } from "@/assets";
-// import { mis } from "@/assets";
+import { timeForGreeting } from "@/utils/helpers";
+import { useAuth } from "@/context/useAuth";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeWindow, setTimeWindow] = useState("day");
   const [greeting, setGreeting] = useState("");
+  const { user } = useAuth();
 
   useEffect(() => {
     setLoading(true);
@@ -25,19 +26,8 @@ const Home = () => {
   }, [timeWindow]);
 
   useEffect(() => {
-    const currHour = new Date().getHours();
-
-    let greetMsg = "";
-    if (currHour <= 11) {
-      greetMsg = "Good Morning!";
-    } else if (currHour <= 16) {
-      greetMsg = "Good Afternoon!";
-    } else {
-      greetMsg = "Good Evening!";
-    }
-
-    setGreeting(greetMsg);
-  }, []);
+    setGreeting(timeForGreeting(user));
+  }, [user]);
 
   return (
     <>
@@ -81,14 +71,10 @@ const Home = () => {
             loop
             muted
           >
-            <source
-              // src="https://spiffy-pasca-367d84.netlify.app/Hero-Action-Clip.mp4"
-              src={heroClip}
-              type="video/mp4"
-            />
+            <source src={heroClip} type="video/mp4" />
           </video>
           <div className="absolute inset-x-0 bottom-0 h-full gradient-theme-adaptive"></div>
-          <div className="relative z-10 text-center flex flex-col items-center justify-center gap-3 text-white h-[60vh] md:h-[80vh]">
+          <div className="relative z-10 text-center flex flex-col items-center justify-center gap-3 text-white h-[80vh] px-2">
             <h3 className="text-3xl md:text-4xl font-bold">{greeting}</h3>
             <h3 className="sm:text-xl font-semibold mb-10">
               Discover the Latest and Greatest in Movies. <br />{" "}

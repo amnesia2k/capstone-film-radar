@@ -4,5 +4,6 @@ import icon from "./icon.svg";
 import logo from "./logo.svg";
 import skeletonCard from "./placeholder-card.svg";
 import heroClip from "./Hero-Action-Clip.mp4";
+import errorImg from "./reels-radar-404.svg";
 
-export { avatar, reel, icon, logo, skeletonCard, heroClip };
+export { avatar, reel, icon, logo, skeletonCard, heroClip, errorImg };
