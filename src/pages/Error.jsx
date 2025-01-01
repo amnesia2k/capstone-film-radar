@@ -43,14 +43,19 @@ const Error = () => {
           content="https://reelsradar.netlify.app/movie_reel_pub.png"
         />
       </Helmet>
-      <div className="h-[80vh] flex flex-col justify-center items-center">
-        <img src={errorImg} alt="error_404_image" />
-        <h3>Lost your way?</h3>
-        <p>
-          Oops! This is awkward. You are looking for something that doesn&apos;t
-          actually exist.
-        </p>
-        <Button onClick={handleGoBack}>Go Back</Button>
+
+      <div className="max-w-4xl w-full mx-auto px-5">
+        <div className="flex flex-col justify-center items-center gap-5 h-screen md:h-[80vh] text-center">
+          <img src={errorImg} alt="error_404_image" />
+          <h3 className="text-xl md:text-3xl lg:text-5xl font-bold">
+            Lost your way?
+          </h3>
+          <p className="text-base md:text-lg">
+            Oops! This is awkward. You are looking for something that
+            doesn&apos;t actually exist.
+          </p>
+          <Button onClick={handleGoBack}>Go Back</Button>
+        </div>
       </div>
     </>
   );

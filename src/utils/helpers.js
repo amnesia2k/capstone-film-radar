@@ -16,4 +16,19 @@ export const minsToHours = (minutes) => {
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
   return `${hours}h ${remainingMinutes}m`;
-}
+};
+
+export const timeForGreeting = (user) => {
+  const currHour = new Date().getHours();
+
+  let greetMsg = "";
+  if (currHour <= 11) {
+    greetMsg = `Good Morning, ${user?.displayName}!`;
+  } else if (currHour <= 16) {
+    greetMsg = `Good Afternoon, ${user?.displayName}!`;
+  } else {
+    greetMsg = `Good Evening, ${user?.displayName}!`;
+  }
+
+  return greetMsg;
+};

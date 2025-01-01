@@ -22,8 +22,6 @@ import { toast } from "sonner";
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const { user, signInWithGoogle, logout } = useAuth();
-  // const [googleUser, setGoogleUser] = useState(null);
-  // const [open, setOpen] = useState(false);
 
   const handleToggle = () => setMobile(true);
 
@@ -38,9 +36,8 @@ const Navbar = () => {
       } else {
         console.warn("no access token was received");
       }
-      // setGoogleUser(user);
       toast.success(`Signed in as ${user?.displayName} successfully`);
-      console.log(user, token, "success");
+      // console.log(user, token, "success");
     } catch (error) {
       console.error(error, "error");
     }

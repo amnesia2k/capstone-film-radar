@@ -39,14 +39,14 @@ const Search = () => {
     e.preventDefault();
     setSearchInput(searchValue);
 
-    // Update URL with the search query and reset the page to 1
+    // this updates URL with the search query and reset the page to 1
     navigate(`?q=${searchValue}&page=1`);
   };
 
   const handlePageChange = (page) => {
     setActivePage(page);
 
-    // Update the URL with the new page
+    // this updates the URL with the new page
     navigate(`?q=${searchInput}&page=${page}`);
   };
 
@@ -117,24 +117,30 @@ const Search = () => {
           </div>
         )}
 
-        {data?.length === 0 && !isLoading && (
+        {/* this renders when a user mounts on search page */}
+        {!searchInput && !isLoading && (
+          <h3 className="text-center text-base md:text-lg mt-10">
+            Please input a Movie or TV Show name to search
+          </h3>
+        )}
+
+        {/* this renders when a user inputs a value that is not found in the database */}
+        {searchInput && data?.length === 0 && !isLoading && (
           <h3 className="text-center text-lg mt-10">
             ...oops, no results found😢
           </h3>
         )}
 
-        <div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-10 gap-5">
-            {data?.length > 0 &&
-              !isLoading &&
-              data?.map((item) => (
-                <CardComponent
-                  key={item?.id}
-                  item={item}
-                  type={item?.media_type}
-                />
-              ))}
-          </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 mt-10 gap-5">
+          {data?.length > 0 &&
+            !isLoading &&
+            data?.map((item) => (
+              <CardComponent
+                key={item?.id}
+                item={item}
+                type={item?.media_type}
+              />
+            ))}
         </div>
 
         {data?.length > 0 && !isLoading && (

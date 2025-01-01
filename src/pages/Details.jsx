@@ -43,18 +43,18 @@ const Details = () => {
           getCredits(type, id),
           getVideos(type, id),
         ]);
-        console.log(detailsData);
+        // console.log(detailsData);
 
         setDetails(detailsData); //movie details data
         setCredits(creditData?.cast?.slice(0, 10)); //credit details data
         const video = videosData.results?.find(
           (video) => video?.type === "Trailer"
         );
-        setVideo(video);
+        setVideo(video); //movie trailer data
         const videos = videosData.results
           ?.filter((video) => video?.type !== "Trailer")
           ?.slice(0, 10);
-        setVideos(videos);
+        setVideos(videos); //movie bts, actors interview, teasers data
       } catch (error) {
         console.error(error, "error");
       } finally {
@@ -216,7 +216,7 @@ const Details = () => {
                     <Button
                       variant="ghost"
                       onClick={handleDelete}
-                      className="border border-green-200 hover:bg-transparent text-green-200 hover:text-green-200"
+                      className="border hover:bg-transparent text-green-700 hover:text-green-600 dark:hover:text-green-200 dark:text-green-300"
                     >
                       <CheckCircle />
                       <span>In Watchlist</span>
@@ -225,7 +225,7 @@ const Details = () => {
                     <Button
                       variant="ghost"
                       onClick={toWatchlist}
-                      className="border hover:bg-transparent hover:text-green-200"
+                      className="border hover:bg-transparent"
                     >
                       <PlusIcon />
                       <span>Add to Watchlist</span>
@@ -244,7 +244,7 @@ const Details = () => {
                   <div className="flex flex-col gap-[5px]">
                     <div
                       className={`flex flex-col text-left ${
-                        type === "movie" ? "text-center" : ""
+                        type === "movie" ? "text-center md:text-left" : ""
                       }`}
                     >
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
@@ -256,7 +256,7 @@ const Details = () => {
                     </div>
                     <div
                       className={`flex flex-col text-left ${
-                        type === "movie" ? "text-center" : ""
+                        type === "movie" ? "text-center md:text-left" : ""
                       }`}
                     >
                       <h3 className="text-[17px] md:text-[20px] font-semibold italic">
@@ -269,7 +269,7 @@ const Details = () => {
                     {type === "movie" ? (
                       <div
                         className={`flex flex-col text-left ${
-                          type === "movie" ? "text-center" : ""
+                          type === "movie" ? "text-center md:text-left" : ""
                         }`}
                       >
                         <h3 className="text-[17px] md:text-[20px] font-semibold italic">
