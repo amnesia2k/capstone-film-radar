@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { mobileNavLinks, navLinks } from ".";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { LogOut, Menu, Search, User2, Video, X } from "lucide-react";
 import { SwitchToggle } from "../switch-toggle";
@@ -18,10 +18,13 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { GoogleAuthProvider } from "firebase/auth";
 import { toast } from "sonner";
+import { firestoreDb } from "@/services/firestore";
 
 const Navbar = () => {
   const [mobile, setMobile] = useState(false);
   const { user, signInWithGoogle, logout } = useAuth();
+  const { userWatchlist } = firestoreDb();
+  const [watchlist, setWatchlist] = useState([]);
 
   const handleToggle = () => setMobile(true);
 
@@ -54,6 +57,20 @@ const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+    if (user?.uid) {
+      userWatchlist(user?.uid)
+        .then((data) => {
+          setWatchlist(data);
+        })
+        .catch((error) => {
+          console.error("Error getting user watchlist: ", error);
+        });
+    }
+  }, [user?.uid, userWatchlist]);
+
+  const totalItems = watchlist.length;
+
   return (
     <header className="shadow-md bg-primary-foreground dark:bg-background">
       {/*dark:bg-[#0c0a09]*/}{" "}
@@ -82,7 +99,9 @@ const Navbar = () => {
             <NavLink
               key={links.id}
               className={({ isActive }) =>
-                `${isActive ? "text-primary" : ""} hover:text-primary`
+                `transition-all duration-300 ${
+                  isActive ? "text-primary" : ""
+                } hover:text-primary`
               }
               to={links.link}
               title={links.tooltip}
@@ -118,7 +137,9 @@ const Navbar = () => {
                 <DropdownMenuGroup>
                   <DropdownMenuItem className="cursor-pointer">
                     <Video />
-                    <Link to="/watchlist">My Watchlist</Link>
+                    <Link to="/watchlist">
+                      My Watchlist {""}({totalItems})
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuItem
@@ -211,7 +232,9 @@ const Navbar = () => {
               <NavLink
                 key={links.id}
                 className={({ isActive }) =>
-                  `${isActive ? "text-primary" : ""} hover:text-primary`
+                  `${
+                    isActive ? "text-primary bg-primary" : ""
+                  }transition-all duration-300  hover:text-primary`
                 }
                 to={links.link}
                 title={links.tooltip}
@@ -232,18 +255,19 @@ const Navbar = () => {
               <div className="flex flex-col gap-2 mt-5 pl-5">
                 <Button
                   variant="ghost"
-                  className="flex justify-start w-[150px]"
-                  // onClick={() => toast.error("Sign in to access watchlist")}
+                  className="flex justify-start w-[180px]"
                   onClick={() => setMobile(false)}
                 >
                   <Video />
                   <Link to="/watchlist">
-                    <h3 className="text-base">My Watchlist</h3>
+                    <h3 className="text-base">
+                      My Watchlist {""}({totalItems})
+                    </h3>
                   </Link>
                 </Button>
                 <Button
                   variant="ghost"
-                  className="flex justify-start w-[150px]"
+                  className="flex justify-start w-[180px]"
                   onClick={handleLogout}
                 >
                   <LogOut />
