@@ -23,12 +23,14 @@ export const timeForGreeting = (user) => {
 
   let greetMsg = "";
   if (currHour <= 11) {
-    greetMsg = `Good Morning, ${user?.displayName}!`;
+    greetMsg = "Good Morning";
   } else if (currHour <= 16) {
-    greetMsg = `Good Afternoon, ${user?.displayName}!`;
+    greetMsg = "Good Afternoon";
   } else {
-    greetMsg = `Good Evening, ${user?.displayName}!`;
+    greetMsg = "Good Evening";
   }
+
+  greetMsg += user?.displayName ? `, ${user.displayName}!` : "!";
 
   return greetMsg;
 };

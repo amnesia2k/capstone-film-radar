@@ -120,7 +120,7 @@ const Search = () => {
         {/* this renders when a user mounts on search page */}
         {!searchInput && !isLoading && (
           <h3 className="text-center text-base md:text-lg mt-10">
-            Please input a Movie or TV Show name to search
+            Please input the name of a Movie or TV Show to search
           </h3>
         )}
 
