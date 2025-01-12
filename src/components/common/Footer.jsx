@@ -19,7 +19,7 @@ const Footer = () => {
         </div>
         <div>
           <p className="text-center">
-            &copy; 2024 | Made with 💛 by{" "}
+            &copy; {new Date().getFullYear()} | Made with 💛 by{" "}
             <a
               href="https://www.tiktok.com/@ola_the_dev"
               className="underline text-primary"
@@ -37,4 +37,4 @@ const Footer = () => {
 
 export default Footer;
 
-// add an about footer link that leads to my portfolio when done with building it
+// need to add an about footer link that leads to my portfolio when done with building it

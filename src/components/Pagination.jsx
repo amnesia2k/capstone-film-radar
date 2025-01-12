@@ -10,7 +10,7 @@ const Pagination = ({ activePage, totalPages, setActivePage }) => {
           variant="outline"
           disabled={activePage === 1}
           onClick={() => setActivePage(activePage - 1)}
-          className={`rounded-full text-white`}
+          className={`rounded-full `}
         >
           <ArrowLeft />
         </Button>
@@ -23,7 +23,7 @@ const Pagination = ({ activePage, totalPages, setActivePage }) => {
           variant="outline"
           disabled={activePage === totalPages}
           onClick={() => setActivePage(activePage + 1)}
-          className="rounded-full text-white"
+          className="rounded-full "
         >
           <ArrowRight />
         </Button>
