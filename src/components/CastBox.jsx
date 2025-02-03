@@ -18,7 +18,7 @@ const CastBox = ({ credits }) => {
           credits?.map((item) => {
             const formatedName = encodeURIComponent(
               item?.name.toLowerCase()
-            ).replace(/%20/, "+");
+            ).replace(/%20/g, "+"); // /g means global
             return (
               <a
                 key={item?.id}
