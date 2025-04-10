@@ -16,6 +16,8 @@ const WatclistCard = ({ type, item, setWatchlist }) => {
     });
   };
 
+  // hello
+
   const posterPath = item?.poster_path
     ? `${imgPathResolve}/${item.poster_path}`
     : "https://www.reelviews.net/resources/img/default_poster.jpg";
