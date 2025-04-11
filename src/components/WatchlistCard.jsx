@@ -12,6 +12,7 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
 
   const handleRemove = (e) => {
     e.preventDefault();
+
     removeFromDb(user.uid, item.id).then(() => {
       setWatchlist((prev) => prev.filter((ev) => ev.id !== item.id));
     });
@@ -21,7 +22,6 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
     e.preventDefault();
 
     toggleWatchedMovie(user.uid, item.id, !item.watchedMovie).then(() => {
-      // Update local UI state to reflect change
       setWatchlist((prev) =>
         prev.map((movie) =>
           movie.id === item.id
