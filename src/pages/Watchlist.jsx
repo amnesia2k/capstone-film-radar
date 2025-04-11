@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { firestoreDb } from "@/services/firestore";
 import { useAuth } from "@/context/useAuth";
 import { toast } from "sonner";
-import WatclistCard from "@/components/WatclistCard";
 import Pagination from "@/components/Pagination";
 import { Helmet } from "react-helmet";
 import { useSearchParams } from "react-router-dom";
 import Loader from "@/components/common/Loader";
+import WatchlistCard from "@/components/WatchlistCard";
 
 const Watchlist = () => {
   const { userWatchlist } = firestoreDb();
@@ -101,7 +101,7 @@ const Watchlist = () => {
         {!isLoading && paginatedWatchlist?.length > 0 && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             {paginatedWatchlist.map((item) => (
-              <WatclistCard
+              <WatchlistCard
                 key={item?.id}
                 item={item}
                 type={item?.type}
@@ -118,6 +118,12 @@ const Watchlist = () => {
             setActivePage={setActivePage}
           />
         )}
+
+        {/* <button
+          onClick={() => toggleWatchedMovie(user.uid, "someMovieId", true)}
+        >
+          Test Toggle
+        </button> */}
       </section>
     </>
   );
