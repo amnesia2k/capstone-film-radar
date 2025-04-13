@@ -48,19 +48,19 @@ const WatchlistCard = ({ type, item, setWatchlist }) => {
     <Link to={`/${type}/${item?.id}`}>
       <div className="relative group transform transition-all hover:scale-105 z-10 rounded-lg shadow-lg overflow-hidden">
         <div
-          className="absolute z-50 top-0 left-0 bg-red-500 p-[5px] rounded-br-md"
+          className="absolute z-50 top-0 left-0 bg-red-500 p-[4px] rounded-br-md"
           onClick={handleRemove}
         >
-          <Trash color="white" />
+          <Trash color="white" size={17} />
         </div>
 
         <div
           className={`absolute z-50 top-0 right-0 ${
             isWatched ? "bg-green-500" : "bg-white/80"
-          } p-[5px] rounded-bl-md`}
+          } p-[4px] rounded-bl-md`}
           onClick={handleWatched}
         >
-          <Check color={isWatched ? "white" : "black"} />
+          <Check color={isWatched ? "white" : "black"} size={17} />
         </div>
 
         <img
